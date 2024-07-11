@@ -1,7 +1,12 @@
+import MainLayout from "@/layouts/MainLayout/MainLayout";
 import { Inter } from "next/font/google";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
-  return <div>hi</div>;
+  return (
+    <MainLayout>
+      <div>hi</div>
+    </MainLayout>
+  );
 }
