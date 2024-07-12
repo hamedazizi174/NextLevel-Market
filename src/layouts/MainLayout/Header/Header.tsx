@@ -13,7 +13,7 @@ export default function Header() {
         py: { md: 2, xs: 1 },
       }}
     >
-      <Image src="/shop.png" alt="shop" width={144} height={60} />
+      <Image src="/logo.jpeg" alt="shop" width={144} height={60} />
       <List sx={{ display: "flex", gap: 1 }}>
         <ListItem sx={{ cursor: "pointer" }}>
           <Link>Login</Link>
