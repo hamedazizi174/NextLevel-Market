@@ -1,15 +1,11 @@
 import { Box } from "@mui/material";
 import Header from "./Header/Header";
 import Footer from "./Footer/Footer";
-import { ReactNode } from "react";
+import { ChildrenType } from "@/types/types";
 
-type prop = {
-  children: ReactNode;
-};
-
-export default function MainLayout({ children }: prop) {
+export default function MainLayout({ children }: ChildrenType) {
   return (
-    <Box sx={{ minHeight: "100vh" }}>
+    <Box minHeight="100vh">
       <Header />
       {children}
       <Footer />

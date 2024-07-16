@@ -1,28 +1,70 @@
-import { Link, List, ListItem, Stack } from "@mui/material";
+import { localization } from "@/constant/localization";
+import {
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  Stack,
+} from "@mui/material";
 import Image from "next/image";
+import LoginIcon from "@mui/icons-material/Login";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import GroupsIcon from "@mui/icons-material/Groups";
 
 export default function Header() {
   return (
     <Stack
-      sx={{
-        flexDirection: "row",
-        justifyContent: "space-between",
-        alignItems: "center",
-        gap: { md: 20, xs: 1 },
-        px: { md: 5, xs: 2 },
-        py: { md: 2, xs: 1 },
-      }}
+      direction="row"
+      justifyContent="space-between"
+      alignItems="center"
+      p="10px"
     >
-      <Image src="/logo.jpeg" alt="shop" width={144} height={60} />
-      <List sx={{ display: "flex", gap: 1 }}>
-        <ListItem sx={{ cursor: "pointer" }}>
-          <Link>Login</Link>
+      <Image src="/logo.jpeg" alt="logo" width={144} height={60} />
+      <List sx={{ display: "flex" }}>
+        <ListItem>
+          <ListItemButton LinkComponent={"a"} href="#">
+            <ListItemIcon sx={{ minWidth: 30 }}>
+              <LoginIcon color="primary" />
+            </ListItemIcon>
+            <ListItemText
+              primary={localization.signInSignUp}
+              sx={{ textWrap: "nowrap" }}
+            />
+          </ListItemButton>
         </ListItem>
-        <ListItem sx={{ cursor: "pointer" }}>
-          <Link>Cart</Link>
+        <ListItem>
+          <ListItemButton LinkComponent={"a"} href="#">
+            <ListItemIcon sx={{ minWidth: 30 }}>
+              <ShoppingCartIcon color="primary" />
+            </ListItemIcon>
+            <ListItemText
+              primary={localization.cart}
+              sx={{ textWrap: "nowrap" }}
+            />
+          </ListItemButton>
         </ListItem>
-        <ListItem sx={{ cursor: "pointer" }}>
-          <Link>About</Link>
+        <ListItem>
+          <ListItemButton LinkComponent={"a"} href="#">
+            <ListItemIcon sx={{ minWidth: 30 }}>
+              <ShoppingCartIcon color="primary" />
+            </ListItemIcon>
+            <ListItemText
+              primary={localization.wishlist}
+              sx={{ textWrap: "nowrap" }}
+            />
+          </ListItemButton>
+        </ListItem>
+        <ListItem>
+          <ListItemButton LinkComponent={"a"} href="#">
+            <ListItemIcon sx={{ minWidth: 30 }}>
+              <GroupsIcon color="primary" />
+            </ListItemIcon>
+            <ListItemText
+              primary={localization.aboutUs}
+              sx={{ textWrap: "nowrap" }}
+            />
+          </ListItemButton>
         </ListItem>
       </List>
     </Stack>
