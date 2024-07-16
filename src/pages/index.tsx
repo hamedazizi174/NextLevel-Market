@@ -1,12 +1,10 @@
 import MainLayout from "@/layouts/MainLayout/MainLayout";
-import { Inter } from "next/font/google";
+import HomeTemplate from "@/templates/Home/Home";
 
-const inter = Inter({ subsets: ["latin"] });
-
-export default function Home() {
+export default function HomePage() {
   return (
     <MainLayout>
-      <div>hi</div>
+      <HomeTemplate />
     </MainLayout>
   );
 }
