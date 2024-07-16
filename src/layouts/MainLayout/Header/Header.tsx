@@ -11,6 +11,7 @@ import Image from "next/image";
 import LoginIcon from "@mui/icons-material/Login";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import GroupsIcon from "@mui/icons-material/Groups";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 
 export default function Header() {
   return (
@@ -47,7 +48,7 @@ export default function Header() {
         <ListItem>
           <ListItemButton LinkComponent={"a"} href="#">
             <ListItemIcon sx={{ minWidth: 30 }}>
-              <ShoppingCartIcon color="primary" />
+              <FavoriteIcon color="primary" />
             </ListItemIcon>
             <ListItemText
               primary={localization.wishlist}
