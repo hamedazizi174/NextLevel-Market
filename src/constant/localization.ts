@@ -5,4 +5,13 @@ export const localization = {
   aboutUs: "درباره ما",
 };
 
-export const pageLevelLocalization = {};
+export const pageLocalization = {
+  home: {},
+  signIn: {
+    signIn: "ورود",
+    email: "ایمیل",
+    password: "رمز عبور",
+    forgotPassword: "رمز عبور را فراموش کرده اید؟",
+    dontHaveAccount: "حساب کاربری ندارید ؟ ایجاد حساب",
+  },
+};

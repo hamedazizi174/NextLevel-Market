@@ -1,5 +1,5 @@
-import { Box } from "@mui/material";
+import SignInTemplate from "@/templates/Signin/SignIn";
 
-export default function Signin() {
-  return <Box>Sign in</Box>;
+export default function SignInPage() {
+  return <SignInTemplate />;
 }
