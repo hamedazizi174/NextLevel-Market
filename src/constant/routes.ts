@@ -9,4 +9,5 @@ export const Routes = {
   ORDERS: "/orders",
   PRODUCT: "/product",
   PRODUCTS: "/products",
+  ADMIN: "/admin",
 };

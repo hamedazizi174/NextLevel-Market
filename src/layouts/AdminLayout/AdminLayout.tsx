@@ -1,13 +1,21 @@
-import { Box } from "@mui/material";
-import Header from "../MainLayout/Header/Header";
-import Footer from "../MainLayout/Footer/Footer";
+import { Box, Grid } from "@mui/material";
 import { ChildrenType } from "@/types/types";
+import Header from "./Header/Header";
+import Footer from "./Footer/Footer";
+import SideBar from "./SideBar/SideBar";
 
 export default function AdminLayout({ children }: ChildrenType) {
   return (
     <Box sx={{ minHeight: "100vh" }}>
       <Header />
-      {children}
+      <Grid container>
+        <Grid item xs={2}>
+          <SideBar />
+        </Grid>
+        <Grid item xs={10}>
+          {children}
+        </Grid>
+      </Grid>
       <Footer />
     </Box>
   );

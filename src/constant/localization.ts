@@ -3,6 +3,7 @@ export const localization = {
   cart: "سبد خرید",
   wishlist: "علاقه‌مندی‌ها",
   aboutUs: "درباره ما",
+  logOut: "خروج",
 };
 
 export const pageLocalization = {
@@ -13,5 +14,10 @@ export const pageLocalization = {
     password: "رمز عبور",
     forgotPassword: "رمز عبور را فراموش کرده اید؟",
     dontHaveAccount: "حساب کاربری ندارید ؟ ایجاد حساب",
+  },
+  admin: {
+    allProducts: "همه محصولات",
+    inventory: "انبار",
+    orders: "سفارشات",
   },
 };
