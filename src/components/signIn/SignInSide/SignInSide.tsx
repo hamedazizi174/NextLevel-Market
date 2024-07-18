@@ -2,7 +2,6 @@ import { Grid, Paper, Stack } from "@mui/material";
 import SignInForm from "./SIgnInForm/SignInForm";
 import CreateOrForgot from "./CreateOrForgot/CreateOrForgot";
 import AvatarAndTitle from "./AvatarAndTitle/AvatarAndTitle";
-import Image from "next/image";
 
 export default function SignInSide() {
   return (
@@ -19,13 +18,11 @@ export default function SignInSide() {
         xs={false}
         sm={4}
         md={7}
-        // sx={{
-        //   backgroundImage: 'url("/hero/heroBook.jpeg")',
-        //   backgroundSize: "cover",
-        // }}
-      >
-        <Image src="/hero/heroBook.jpeg" alt="book" layout="fill" />
-      </Grid>
+        sx={{
+          backgroundImage: 'url("/signin.jpeg")',
+          backgroundSize: "cover",
+        }}
+      />
     </Grid>
   );
 }

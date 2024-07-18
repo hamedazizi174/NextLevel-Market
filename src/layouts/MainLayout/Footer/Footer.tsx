@@ -6,8 +6,7 @@ export default function Footer() {
       sx={{
         position: "absolute",
         bottom: "-9rem",
-        width: "100%",
-        px: 5,
+        width: "90%",
       }}
     >
       <hr className="h-0.5 bg-gray-200" />
