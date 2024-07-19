@@ -19,5 +19,6 @@ export const pageLocalization = {
     allProducts: "همه محصولات",
     inventory: "انبار",
     orders: "سفارشات",
+    welcome: "خوش آمدید",
   },
 };

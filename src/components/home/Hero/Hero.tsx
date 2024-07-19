@@ -38,9 +38,6 @@ export default function Hero() {
       <SwiperSlide style={{ height: "500px" }}>
         <Image src="/hero/heroFurniture.jpeg" alt="furniture" layout="fill" />
       </SwiperSlide>
-      <SwiperSlide style={{ height: "500px" }}>
-        <Image src="/hero/heroGrocery.jpeg" alt="grocery" layout="fill" />
-      </SwiperSlide>
     </Swiper>
   );
 }

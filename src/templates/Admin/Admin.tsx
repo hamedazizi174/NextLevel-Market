@@ -1,3 +1,5 @@
+import Welcome from "@/components/admin/Welcome/Welcome";
+
 export default function AdminTemplate() {
-  return <div>admin</div>;
+  return <Welcome />;
 }
