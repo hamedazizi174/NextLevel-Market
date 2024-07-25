@@ -9,7 +9,7 @@ import {
 
 export default function SideBar() {
   return (
-    <Paper elevation={6} sx={{ height: "600px" }}>
+    <Paper elevation={6} sx={{ height: "600px", bgcolor: "lightblue" }}>
       <List>
         <ListItem>
           <ListItemButton LinkComponent={"a"} href="#">

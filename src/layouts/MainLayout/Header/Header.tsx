@@ -12,6 +12,7 @@ import LoginIcon from "@mui/icons-material/Login";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import GroupsIcon from "@mui/icons-material/Groups";
 import FavoriteIcon from "@mui/icons-material/Favorite";
+import { Routes } from "@/constant/routes";
 
 export default function Header() {
   return (
@@ -24,7 +25,7 @@ export default function Header() {
       <Image src="/logo.jpeg" alt="logo" width={144} height={60} />
       <List sx={{ display: "flex" }}>
         <ListItem>
-          <ListItemButton LinkComponent={"a"} href="#">
+          <ListItemButton LinkComponent={"a"} href={Routes.SIGNIN}>
             <ListItemIcon sx={{ minWidth: 30 }}>
               <LoginIcon color="primary" />
             </ListItemIcon>
