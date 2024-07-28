@@ -9,9 +9,6 @@ import {
 } from "@mui/material";
 import Image from "next/image";
 import LoginIcon from "@mui/icons-material/Login";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import GroupsIcon from "@mui/icons-material/Groups";
-import FavoriteIcon from "@mui/icons-material/Favorite";
 
 export default function Header() {
   return (

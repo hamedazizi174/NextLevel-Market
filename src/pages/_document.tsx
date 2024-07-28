@@ -4,7 +4,7 @@ export default function Document() {
   return (
     <Html lang="fa" dir="rtl">
       <Head />
-      <body style={{ paddingLeft: 80, paddingRight: 80 }}>
+      <body>
         <Main />
         <NextScript />
       </body>

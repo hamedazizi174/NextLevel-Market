@@ -1,12 +1,20 @@
 import { pageLocalization } from "@/constant/localization";
-import { Stack } from "@mui/material";
+import { Grid } from "@mui/material";
 import Link from "next/link";
 
 export default function CreateOrForgot() {
   return (
-    <Stack direction="row" justifyContent="space-between" width="100%">
-      <Link href="#">{pageLocalization.signIn.dontHaveAccount}</Link>
-      <Link href="#">{pageLocalization.signIn.forgotPassword}</Link>
-    </Stack>
+    <Grid container justifyContent="space-between">
+      <Grid item xs={12} sm={"auto"} mt={1}>
+        <Link href="#" style={{ textDecoration: "none" }}>
+          {pageLocalization.signIn.dontHaveAccount}
+        </Link>
+      </Grid>
+      <Grid item xs={12} sm={"auto"} mt={1}>
+        <Link href="#" style={{ textDecoration: "none" }}>
+          {pageLocalization.signIn.forgotPassword}
+        </Link>
+      </Grid>
+    </Grid>
   );
 }

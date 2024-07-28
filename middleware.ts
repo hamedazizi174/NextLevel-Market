@@ -3,8 +3,6 @@ import { NextResponse } from "next/dist/server/web/spec-extension/response";
 
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
-  // const token = request.cookies.has("accessToken");
-  // const role = request.cookies.get("role");
   const token = localStorage.getItem("accessToken");
   const user = localStorage.getItem("user");
   const role = user ? JSON.parse(user).role : null;
