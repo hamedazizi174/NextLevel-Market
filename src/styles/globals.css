@@ -5,6 +5,6 @@
   src: url("/fonts/nazanin/ttf") format("ttf");
 }
 
-body {
+* {
   font-family: nazanin;
 }

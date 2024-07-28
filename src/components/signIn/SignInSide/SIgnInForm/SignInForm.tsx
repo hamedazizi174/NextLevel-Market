@@ -1,20 +1,24 @@
+import { usePostUser } from "@/api/auth/auth.queries";
 import { pageLocalization } from "@/constant/localization";
 import { Box, Button, TextField } from "@mui/material";
+import { useState } from "react";
 import { FieldValues, useForm } from "react-hook-form";
 
 export default function SignInForm() {
+  const [user, setUser] = useState({ username: "", password: "" });
   const { register, handleSubmit } = useForm();
+  const { mutate: signinMutate } = usePostUser(user);
 
   function handleLogin(data: FieldValues) {
-    console.log(data);
+    setUser({ username: data.username, password: data.password });
+    signinMutate();
   }
 
   return (
     <Box component="form" onSubmit={handleSubmit(handleLogin)} mt={2}>
       <TextField
-        type="email"
         label={pageLocalization.signIn.email}
-        {...register("email")}
+        {...register("username")}
         margin="normal"
         fullWidth
         autoFocus

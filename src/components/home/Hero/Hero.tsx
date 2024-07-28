@@ -18,25 +18,25 @@ export default function Hero() {
       modules={[Pagination, Navigation, Autoplay]}
     >
       <SwiperSlide style={{ height: "500px" }}>
-        <Image src="/hero/heroBook.jpeg" alt="book" layout="fill" />
+        <Image src="/hero/heroBook.jpeg" alt="book" fill />
       </SwiperSlide>
       <SwiperSlide style={{ height: "500px" }}>
-        <Image src="/hero/heroStationary.png" alt="station" layout="fill" />
+        <Image src="/hero/heroStationary.png" alt="station" fill />
       </SwiperSlide>
       <SwiperSlide style={{ height: "500px" }}>
-        <Image src="/hero/heroCloth.jpeg" alt="cloth" layout="fill" />
+        <Image src="/hero/heroCloth.jpeg" alt="cloth" fill />
       </SwiperSlide>
       <SwiperSlide style={{ height: "500px" }}>
-        <Image src="/hero/heroPurse.jpeg" alt="purse" layout="fill" />
+        <Image src="/hero/heroPurse.jpeg" alt="purse" fill />
       </SwiperSlide>
       <SwiperSlide style={{ height: "500px" }}>
-        <Image src="/hero/heroShoe.png" alt="shoe" layout="fill" />
+        <Image src="/hero/heroShoe.png" alt="shoe" fill />
       </SwiperSlide>
       <SwiperSlide style={{ height: "500px" }}>
-        <Image src="/hero/heroTech.jpeg" alt="tech" layout="fill" />
+        <Image src="/hero/heroTech.jpeg" alt="tech" fill />
       </SwiperSlide>
       <SwiperSlide style={{ height: "500px" }}>
-        <Image src="/hero/heroFurniture.jpeg" alt="furniture" layout="fill" />
+        <Image src="/hero/heroFurniture.jpeg" alt="furniture" fill />
       </SwiperSlide>
     </Swiper>
   );
