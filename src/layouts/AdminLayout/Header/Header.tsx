@@ -1,4 +1,3 @@
-import { localization } from "@/constant/localization";
 import {
   List,
   ListItem,
@@ -8,7 +7,10 @@ import {
   Stack,
 } from "@mui/material";
 import Image from "next/image";
-import LoginIcon from "@mui/icons-material/Login";
+import LogoutIcon from "@mui/icons-material/Logout";
+import SideDrawer from "./SideDrawer/SideDrawer";
+import { localization } from "@/constant/localization";
+import { theme } from "@/theme/nexxsic";
 
 export default function Header() {
   return (
@@ -17,17 +19,19 @@ export default function Header() {
       justifyContent="space-between"
       alignItems="center"
       p="10px"
+      bgcolor="#dafffc"
     >
+      <SideDrawer />
       <Image src="/logo.jpeg" alt="logo" width={144} height={60} />
       <List sx={{ display: "flex" }}>
-        <ListItem>
+        <ListItem sx={{ px: "0" }}>
           <ListItemButton LinkComponent={"a"} href="#">
-            <ListItemIcon sx={{ minWidth: 30 }}>
-              <LoginIcon color="primary" />
+            <ListItemIcon sx={{ minWidth: { xs: "20px", md: "30px" } }}>
+              <LogoutIcon color="primary" />
             </ListItemIcon>
             <ListItemText
               primary={localization.logOut}
-              sx={{ textWrap: "nowrap" }}
+              sx={{ display: { xs: "none", md: "block" } }}
             />
           </ListItemButton>
         </ListItem>

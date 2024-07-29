@@ -16,6 +16,7 @@ export const pageLocalization = {
     dontHaveAccount: "حساب کاربری ندارید ؟ ایجاد حساب",
   },
   admin: {
+    adminَAccess: "دسترسی های مدیر",
     allProducts: "همه محصولات",
     inventory: "انبار",
     orders: "سفارشات",
