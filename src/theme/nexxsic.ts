@@ -13,4 +13,5 @@ export const theme = createTheme({
       dark: "#00b492",
     },
   },
+  direction: "rtl",
 });
