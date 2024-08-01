@@ -17,7 +17,7 @@ export default function SignInForm() {
   return (
     <Box component="form" onSubmit={handleSubmit(handleLogin)} mt={2}>
       <TextField
-        label={pageLocalization.signIn.email}
+        label={pageLocalization.signIn.userName}
         {...register("username")}
         margin="normal"
         fullWidth

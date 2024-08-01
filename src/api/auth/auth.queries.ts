@@ -1,11 +1,11 @@
 import { useMutation } from "@tanstack/react-query";
 import { postUserApi } from "./auth.api";
-import { UserType } from "@/types/types";
+import { UserSigninType } from "@/types/types";
 import { useRouter } from "next/router";
 import { ROUTES } from "@/constant/routes";
 import { ROLES, TOKENS, USER } from "@/constant/general";
 
-export function usePostUser(user: UserType) {
+export function usePostUser(user: UserSigninType) {
   const router = useRouter();
   return useMutation({
     mutationFn: () => postUserApi(user),

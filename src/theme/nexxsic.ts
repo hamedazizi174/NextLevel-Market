@@ -1,4 +1,5 @@
 import { createTheme } from "@mui/material";
+import type {} from "@mui/x-data-grid/themeAugmentation";
 
 export const theme = createTheme({
   palette: {
@@ -9,8 +10,18 @@ export const theme = createTheme({
     },
     secondary: {
       main: "#00e9c8",
-      light: "#27ffed",
+      light: "#dff1fc",
       dark: "#00b492",
+    },
+    success: {
+      main: "#1cd93f",
+      light: "#62d688",
+      dark: "#009f3e",
+    },
+  },
+  mixins: {
+    MuiDataGrid: {
+      containerBackground: "#fceadf",
     },
   },
   direction: "rtl",
