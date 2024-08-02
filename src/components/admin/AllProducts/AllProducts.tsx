@@ -1,7 +1,6 @@
 import { useGetAllProducts } from "@/api/products/products.queries";
 import { pageLocalization } from "@/constant/localization";
 import {
-  Button,
   Pagination,
   Paper,
   Stack,
@@ -14,6 +13,7 @@ import {
 import { useState } from "react";
 import TableBodyRows from "./TableBodyRows/TableBodyRows";
 import TableHeadRow from "./TableHeadRows/TableHeadRow";
+import AddProduct from "./AddProduct/AddProduct";
 
 export default function AllProducts() {
   const [page, setPage] = useState(1);
@@ -33,13 +33,7 @@ export default function AllProducts() {
       p={2}
       position="relative"
     >
-      <Button
-        variant="contained"
-        color="success"
-        sx={{ position: "absolute", right: 40, top: 20 }}
-      >
-        {pageLocalization.admin.addProduct}
-      </Button>
+      <AddProduct />
       <Typography variant="h5" fontWeight={900}>
         {pageLocalization.admin.productsTable}
       </Typography>

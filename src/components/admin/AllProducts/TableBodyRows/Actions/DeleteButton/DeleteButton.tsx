@@ -1,9 +1,19 @@
 import { IconButton } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
+import { useDeleteProduct } from "@/api/products/products.queries";
 
-export default function DeleteButton() {
+type prop = {
+  id: string;
+};
+
+export default function DeleteButton({ id }: prop) {
+  const { mutate } = useDeleteProduct(id);
+  function deleteProduct() {
+    mutate();
+  }
+
   return (
-    <IconButton aria-label="delete">
+    <IconButton aria-label="delete" onClick={deleteProduct}>
       <DeleteIcon color="error" />
     </IconButton>
   );

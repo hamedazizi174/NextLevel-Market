@@ -16,7 +16,7 @@ export default function TableBodyRows({ allProducts }: Props) {
       image: product.images,
       productName: product.name,
       division: `${product.category.name}/${product.subcategory.name}`,
-      actions: <Actions />,
+      actions: <Actions id={product._id} />,
     };
   });
 
