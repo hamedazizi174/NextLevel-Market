@@ -1,14 +1,7 @@
 import { Box, List, ListItem, Stack, Typography } from "@mui/material";
 export default function Footer() {
   return (
-    <Box
-      component="footer"
-      sx={{
-        position: "absolute",
-        bottom: "-9rem",
-        width: "90%",
-      }}
-    >
+    <Box component="footer">
       <hr className="h-0.5 bg-gray-200" />
       <Stack
         sx={{

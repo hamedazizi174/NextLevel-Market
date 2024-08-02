@@ -8,7 +8,10 @@ export const localization = {
 };
 
 export const pageLocalization = {
-  home: {},
+  home: {
+    shopOurTopCategories: "از بهترین مجموعه‌هایمان خرید کنید",
+    allCategories: "همه مجموعه‌ها",
+  },
   signIn: {
     signIn: "ورود",
     userName: "نام کاربری",

@@ -1,5 +1,6 @@
-import { Box } from "@mui/material";
+import MainLayout from "@/layouts/MainLayout/MainLayout";
+import ProductsTemplate from "@/templates/Products/Products";
 
 export default function ProductsPage() {
-  return <Box>Products</Box>;
+  return <MainLayout>wrong page</MainLayout>;
 }
