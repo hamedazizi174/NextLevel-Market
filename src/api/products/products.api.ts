@@ -25,3 +25,8 @@ export async function getProductsByPriceApi(
   );
   return res.data;
 }
+
+export async function deleteProduct(id: string) {
+  const res = await api.delete(`/products/${id}`);
+  return res.data;
+}

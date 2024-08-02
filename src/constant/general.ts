@@ -1,4 +1,6 @@
 export const USER = "user";
+export const CATEGORIES = ["book", "purse", "tech", "cloth", "shoe"];
+export const SUB_CATEGORIES = ["book", "purse", "tech", "cloth", "shoe"];
 
 export enum ROLES {
   ADMIN = "ADMIN",

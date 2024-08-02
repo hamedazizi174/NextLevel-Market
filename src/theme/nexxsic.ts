@@ -19,10 +19,9 @@ export const theme = createTheme({
       dark: "#009f3e",
     },
   },
-  mixins: {
-    MuiDataGrid: {
-      containerBackground: "#fceadf",
-    },
+  typography: {
+    fontFamily: "nazanin",
+    fontSize: 16,
   },
   direction: "rtl",
 });

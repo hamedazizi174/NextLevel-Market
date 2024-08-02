@@ -1,10 +1,5 @@
 @font-face {
   font-family: nazanin;
   font-style: normal;
-  font-weight: 400;
-  src: url("/fonts/nazanin/ttf") format("ttf");
-}
-
-* {
-  font-family: nazanin;
+  src: url("../assets/fonts/nazanin.ttf") format("ttf");
 }
