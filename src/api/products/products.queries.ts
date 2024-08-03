@@ -1,5 +1,12 @@
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import {
+  useMutation,
+  useQuery,
+  useMutation,
+  useQuery,
+  useQueryClientClient,
+} from "@tanstack/react-query";
+import {
+  deleteProduct,
   deleteProduct,
   getAllProductsApi,
   getProductByIdApi,
@@ -41,6 +48,18 @@ export const useGetProductsByPrice = (
     refetchOnMount: "always",
   });
 };
+
+export function useDeleteProduct(id: string) {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: () => deleteProduct(id),
+    onSuccess() {
+      queryClient.invalidateQueries({
+        queryKey: ["all-products"],
+      });
+    },
+  });
+}
 
 export function useDeleteProduct(id: string) {
   const queryClient = useQueryClient();
