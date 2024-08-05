@@ -1,3 +1,4 @@
+import { PostingProductType } from "@/types/types";
 import { api } from "../config.api";
 
 export async function getAllProductsApi(page: number) {
@@ -26,12 +27,12 @@ export async function getProductsByPriceApi(
   return res.data;
 }
 
-export async function deleteProduct(id: string) {
-  const res = await api.delete(`/products/${id}`);
+export async function postProductApi(product: FormData) {
+  const res = await api.post(`/products`, product);
   return res.data;
 }
 
-export async function deleteProduct(id: string) {
+export async function deleteProductApi(id: string) {
   const res = await api.delete(`/products/${id}`);
   return res.data;
 }

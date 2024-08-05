@@ -27,37 +27,40 @@ export default function Categories() {
           </Link>
         </Stack>
         <Stack direction="row" gap="70px" pb="8px">
-          {categories?.data.categories.map((category: CategoryType) => {
-            return (
-              <Link
-                href={`/categories/${category?.name}`}
-                style={{ position: "relative" }}
-                key={category._id}
-              >
-                <Typography
-                  variant="h5"
-                  position="absolute"
-                  top="0.75rem"
-                  left="50%"
-                  color="white"
-                  fontSize="1.25rem"
-                  fontWeight="600"
-                  sx={{
-                    transform: "translateX(-50%)",
-                  }}
+          {categories?.data.categories.map(
+            (category: CategoryType, index: number) => {
+              return (
+                <Link
+                  href={`/categories/${category?.name}`}
+                  style={{ position: "relative" }}
+                  key={category._id}
                 >
-                  {category?.name}
-                </Typography>
-                <Image
-                  src={`http://localhost:8000/images/categories/icons/${category?.icon}`}
-                  alt={category?.name}
-                  height={296}
-                  width={230}
-                  style={{ objectFit: "contain" }}
-                />
-              </Link>
-            );
-          })}
+                  <Typography
+                    variant="h5"
+                    position="absolute"
+                    top="0.75rem"
+                    left="50%"
+                    color="white"
+                    fontSize="1.25rem"
+                    fontWeight="600"
+                    sx={{
+                      transform: "translateX(-50%)",
+                    }}
+                  >
+                    {pageLocalization.admin.categoriesArray[index]}
+                    {/* {category?.name} */}
+                  </Typography>
+                  <Image
+                    src={`http://localhost:8000/images/categories/icons/${category?.icon}`}
+                    alt={category?.name}
+                    height={296}
+                    width={230}
+                    style={{ objectFit: "contain" }}
+                  />
+                </Link>
+              );
+            }
+          )}
         </Stack>
       </Stack>
     </Box>

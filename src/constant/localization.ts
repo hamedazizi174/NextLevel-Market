@@ -46,7 +46,7 @@ export const pageLocalization = {
     orderStatus: "وضعیت سفارش",
     category: "مجموعه",
     subcategory: "زیر مجموعه",
-    categoriesArray: ["کتاب", "کیف", "تکنولوژی", "لباس", "کفش"],
+    categoriesArray: ["کتاب", "لباس", "کیف", "تکنولوژی", "کفش"],
     book: "کتاب",
     purse: "کیف",
     tech: "تکنولوژی",

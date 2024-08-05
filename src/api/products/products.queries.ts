@@ -1,17 +1,11 @@
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import {
-  useMutation,
-  useQuery,
-  useMutation,
-  useQuery,
-  useQueryClientClient,
-} from "@tanstack/react-query";
-import {
-  deleteProduct,
-  deleteProduct,
+  deleteProductApi,
   getAllProductsApi,
   getProductByIdApi,
   getProductsByCategoryIdApi,
   getProductsByPriceApi,
+  postProductApi,
 } from "./products.api";
 
 export function useGetAllProducts(page: number) {
@@ -49,10 +43,10 @@ export const useGetProductsByPrice = (
   });
 };
 
-export function useDeleteProduct(id: string) {
+export function usePostProduct() {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: () => deleteProduct(id),
+    mutationFn: (product: FormData) => postProductApi(product),
     onSuccess() {
       queryClient.invalidateQueries({
         queryKey: ["all-products"],
@@ -64,7 +58,7 @@ export function useDeleteProduct(id: string) {
 export function useDeleteProduct(id: string) {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: () => deleteProduct(id),
+    mutationFn: () => deleteProductApi(id),
     onSuccess() {
       queryClient.invalidateQueries({
         queryKey: ["all-products"],

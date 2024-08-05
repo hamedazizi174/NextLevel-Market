@@ -49,6 +49,26 @@ export type ProductType = {
   slugname: string;
 };
 
+export type ResAllProducts = {
+  status: string;
+  page: number;
+  per_page: number;
+  total: number;
+  total_pages: number;
+  data: { products: ProductType[] };
+};
+
+export type PostingProductType = {
+  category: CategoryType;
+  subcategory: SubcategoryType;
+  name: string;
+  price: number;
+  quantity: number;
+  brand: string;
+  description: string;
+  images: File;
+};
+
 export type UserType = {
   _id: string;
   firstname: string;

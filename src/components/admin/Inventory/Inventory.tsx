@@ -2,7 +2,6 @@ import { useGetAllProducts } from "@/api/products/products.queries";
 import { pageLocalization } from "@/constant/localization";
 import {
   Button,
-  Pagination,
   Paper,
   Stack,
   Table,
@@ -14,14 +13,11 @@ import {
 import { useState } from "react";
 import TableHeadRow from "./TableHeadRows/TableHeadRow";
 import TableBodyRows from "./TableBodyRows/TableBodyRows";
+import PaginationCom from "@/components/shared/Pagination/Pagination";
 
 export default function Inventory() {
   const [page, setPage] = useState(1);
   const { data: allProducts } = useGetAllProducts(page);
-
-  function changePage(event: React.ChangeEvent<unknown>, newPage: number) {
-    setPage(newPage);
-  }
 
   return (
     <Stack
@@ -52,12 +48,7 @@ export default function Inventory() {
           </TableBody>
         </Table>
       </TableContainer>
-      <Pagination
-        count={allProducts?.total_pages}
-        page={page}
-        color="secondary"
-        onChange={changePage}
-      />
+      <PaginationCom page={page} setPage={setPage} items={allProducts} />
     </Stack>
   );
 }

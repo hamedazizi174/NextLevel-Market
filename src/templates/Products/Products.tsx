@@ -15,7 +15,7 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import { MouseEvent, useState } from "react";
+import { useState } from "react";
 
 type prop = {
   categoryName: string;
