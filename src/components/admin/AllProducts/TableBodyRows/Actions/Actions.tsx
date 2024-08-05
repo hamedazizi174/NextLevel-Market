@@ -1,6 +1,6 @@
-import DeleteButton from "@/components/admin/AllProducts/TableBodyRows/Actions/DeleteButton/DeleteButton";
-import EditButton from "@/components/admin/AllProducts/TableBodyRows/Actions/EditButton/EditButton";
 import { Stack } from "@mui/material";
+import DeleteProduct from "./DeleteProduct/DeleteProduct";
+import EditProduct from "./EditProduct/EditProduct";
 
 type prop = {
   id: string;
@@ -9,8 +9,8 @@ type prop = {
 export default function Actions({ id }: prop) {
   return (
     <Stack direction="row" justifyContent="center" spacing={2}>
-      <EditButton />
-      <DeleteButton id={id} />
+      <EditProduct />
+      <DeleteProduct id={id} />
     </Stack>
   );
 }

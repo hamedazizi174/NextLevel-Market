@@ -16,6 +16,7 @@ import {
 import { useState } from "react";
 import { FieldValues, useForm } from "react-hook-form";
 import { fieldData } from "./fieldDatd";
+import { toast, Toaster } from "sonner";
 
 type Props = {
   open: boolean;
@@ -43,75 +44,79 @@ export default function AddModal({ open, closeModal }: Props) {
     addProductMutate(formData);
     reset();
     closeModal();
+    toast.success(pageLocalization.admin.addProductSuccess);
   }
 
   return (
-    <Modal
-      open={open}
-      onClose={closeModal}
-      sx={{ pt: 3, maxWidth: "900px", margin: "auto" }}
-    >
-      <Card sx={{ maxHeight: "80%", overflow: "scroll" }}>
-        <CardContent>
-          <Box component="form" onSubmit={handleSubmit(addProduct)}>
-            <Grid container spacing={2}>
-              {fieldData.map((item, index) => (
-                <Grid item xs={12} sm={6} xl={4} key={index}>
+    <>
+      <Toaster richColors position="top-left" />
+      <Modal
+        open={open}
+        onClose={closeModal}
+        sx={{ pt: 3, maxWidth: "900px", margin: "auto" }}
+      >
+        <Card sx={{ maxHeight: "80%", overflow: "scroll" }}>
+          <CardContent>
+            <Box component="form" onSubmit={handleSubmit(addProduct)}>
+              <Grid container spacing={2}>
+                {fieldData.map((item, index) => (
+                  <Grid item xs={12} sm={6} xl={4} key={index}>
+                    <TextField
+                      type={item.type}
+                      label={item.label}
+                      {...register(item.name)}
+                      fullWidth
+                      required
+                    />
+                  </Grid>
+                ))}
+                <Grid item xs={12} sm={6}>
                   <TextField
-                    type={item.type}
-                    label={item.label}
-                    {...register(item.name)}
+                    {...register("category")}
+                    select
+                    label={pageLocalization.admin.category}
+                    onChange={(e) => setSelectedCategoryId(e.target.value)}
                     fullWidth
                     required
-                  />
+                  >
+                    {categories?.data?.categories?.map(
+                      (category: CategoryType, index: number) => {
+                        return (
+                          <MenuItem value={category._id} key={index}>
+                            {pageLocalization.admin.categoriesArray[index]}
+                          </MenuItem>
+                        );
+                      }
+                    )}
+                  </TextField>
                 </Grid>
-              ))}
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  {...register("category")}
-                  select
-                  label={pageLocalization.admin.category}
-                  onChange={(e) => setSelectedCategoryId(e.target.value)}
-                  fullWidth
-                  required
-                >
-                  {categories?.data?.categories?.map(
-                    (category: CategoryType, index: number) => {
-                      return (
-                        <MenuItem value={category._id} key={index}>
-                          {pageLocalization.admin.categoriesArray[index]}
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                    {...register("subcategory")}
+                    select
+                    label={pageLocalization.admin.subcategory}
+                    fullWidth
+                    required
+                  >
+                    {subcategories?.data?.subcategories?.map(
+                      (subcategory: SubcategoryType, index: number) => (
+                        <MenuItem value={subcategory._id} key={index}>
+                          {subcategory.name}
                         </MenuItem>
-                      );
-                    }
-                  )}
-                </TextField>
+                      )
+                    )}
+                  </TextField>
+                </Grid>
+                <Grid item xs={12}>
+                  <Button type="submit" variant="contained" fullWidth>
+                    {pageLocalization.admin.addProduct}
+                  </Button>
+                </Grid>
               </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  {...register("subcategory")}
-                  select
-                  label={pageLocalization.admin.subcategory}
-                  fullWidth
-                  required
-                >
-                  {subcategories?.data?.subcategories?.map(
-                    (subcategory: SubcategoryType, index: number) => (
-                      <MenuItem value={subcategory._id} key={index}>
-                        {subcategory.name}
-                      </MenuItem>
-                    )
-                  )}
-                </TextField>
-              </Grid>
-              <Grid item xs={12}>
-                <Button type="submit" variant="contained" fullWidth>
-                  {pageLocalization.admin.addProduct}
-                </Button>
-              </Grid>
-            </Grid>
-          </Box>
-        </CardContent>
-      </Card>
-    </Modal>
+            </Box>
+          </CardContent>
+        </Card>
+      </Modal>
+    </>
   );
 }

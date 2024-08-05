@@ -1,4 +1,3 @@
-import { PostingProductType } from "@/types/types";
 import { api } from "../config.api";
 
 export async function getAllProductsApi(page: number) {

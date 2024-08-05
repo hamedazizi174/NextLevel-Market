@@ -5,6 +5,8 @@ export const localization = {
   aboutUs: "درباره ما",
   logOut: "خروج",
   totalPrice: "مجموع مبلغ",
+  delete: "حذف",
+  cancel: "انصراف",
 };
 
 export const pageLocalization = {
@@ -54,5 +56,8 @@ export const pageLocalization = {
     shoe: "کفش",
     description: "توضیحات",
     brand: "برند",
+    addProductSuccess: "کالا با موفقیت اضافه شد",
+    deleteProductSuccess: "کالا با موفقیت حذف شد",
+    confirmDeleteProduct: "آیا از حذف کالا مطمئن هستید؟",
   },
 };

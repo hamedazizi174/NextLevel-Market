@@ -63,7 +63,7 @@ export default function ProductTemplate({ productId }: prop) {
       {product?.data?.products[0] ? (
         <Paper elevation={5} sx={{ borderRadius: "24px" }}>
           <Stack flexDirection="row" flexWrap="wrap">
-            <Toaster />
+            <Toaster richColors />
             <Box position="relative" sx={{ width: "50%" }}>
               <Image
                 style={{ flexGrow: 1, borderRadius: "24px 0 0 24px" }}
