@@ -35,3 +35,8 @@ export async function deleteProductApi(id: string) {
   const res = await api.delete(`/products/${id}`);
   return res.data;
 }
+
+export async function editProductApi(product: FormData, productId: string) {
+  const res = await api.patch(`/products/${productId}`, product);
+  return res.data;
+}

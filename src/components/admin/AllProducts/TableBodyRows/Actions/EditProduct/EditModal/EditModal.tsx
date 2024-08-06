@@ -1,5 +1,8 @@
 import { useGetCategories } from "@/api/categories/categories.queries";
-import { usePostProduct } from "@/api/products/products.queries";
+import {
+  useEditProduct,
+  useGetProductById,
+} from "@/api/products/products.queries";
 import { useGetSubcategories } from "@/api/subcategories/subcategories.queries";
 import { pageLocalization } from "@/constant/localization";
 import { CategoryType, SubcategoryType } from "@/types/types";
@@ -13,35 +16,52 @@ import {
   Modal,
   TextField,
 } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FieldValues, useForm } from "react-hook-form";
-import { fieldData } from "./fieldDatd";
 import { toast, Toaster } from "sonner";
+import { fieldData } from "./fieldData";
 
 type Props = {
   open: boolean;
+  id: string;
   closeModal: () => void;
 };
 
-export default function AddModal({ open, closeModal }: Props) {
-  const { register, handleSubmit, reset } = useForm();
-  const { data: categories } = useGetCategories();
+export default function EditModal({ open, closeModal, id }: Props) {
+  const { data: product } = useGetProductById(id);
+  const values = {
+    name: product?.data.products[0].name,
+    price: product?.data.products[0].price,
+    quantity: product?.data.products[0].quantity,
+    brand: product?.data.products[0].brand,
+    description: product?.data.products[0].description,
+    category: product?.data.products[0].category._id,
+    subcategory: product?.data.products[0].subcategory._id,
+  };
+  const { register, handleSubmit, reset } = useForm({ values });
   const [selectedCategoryId, setSelectedCategoryId] = useState("");
+  const { data: categories } = useGetCategories();
   const { data: subcategories } = useGetSubcategories(selectedCategoryId);
-  const { mutate: addProductMutate } = usePostProduct();
+  const { mutate: editProductMutate } = useEditProduct(id);
 
-  function addProduct(data: FieldValues) {
+  function editProduct(data: FieldValues) {
     const formData = new FormData();
     Object.keys(data).forEach((key) => {
-      key === "images"
+      key !== "images"
+        ? formData.append(key, data[key])
+        : data.images.length
         ? formData.append("images", data.images[0])
-        : formData.append(key, data[key]);
+        : null;
     });
-    addProductMutate(formData);
+    editProductMutate(formData);
     reset();
     closeModal();
-    toast.success(pageLocalization.admin.addProductSuccess);
+    toast.success(pageLocalization.admin.editProductSuccess);
   }
+
+  useEffect(() => {
+    setSelectedCategoryId(values.category);
+  }, [values.category]);
 
   return (
     <>
@@ -53,16 +73,16 @@ export default function AddModal({ open, closeModal }: Props) {
       >
         <Card sx={{ maxHeight: "80%", overflowY: "scroll" }}>
           <CardContent>
-            <Box component="form" onSubmit={handleSubmit(addProduct)}>
+            <Box component="form" onSubmit={handleSubmit(editProduct)}>
               <Grid container spacing={2}>
                 {fieldData.map((item, index) => (
                   <Grid item xs={12} sm={6} xl={4} key={index}>
                     <TextField
                       type={item.type}
                       label={item.label}
-                      {...register(item.name)}
+                      {...register(item.name as any)}
                       fullWidth
-                      required
+                      required={item.type === "file" ? false : true}
                     />
                   </Grid>
                 ))}
@@ -72,6 +92,7 @@ export default function AddModal({ open, closeModal }: Props) {
                     select
                     label={pageLocalization.admin.category}
                     onChange={(e) => setSelectedCategoryId(e.target.value)}
+                    defaultValue={values.category}
                     fullWidth
                     required
                   >
@@ -91,6 +112,7 @@ export default function AddModal({ open, closeModal }: Props) {
                     {...register("subcategory")}
                     select
                     label={pageLocalization.admin.subcategory}
+                    defaultValue={values.subcategory}
                     fullWidth
                     required
                   >
@@ -105,7 +127,7 @@ export default function AddModal({ open, closeModal }: Props) {
                 </Grid>
                 <Grid item xs={12}>
                   <Button type="submit" variant="contained" fullWidth>
-                    {pageLocalization.admin.addProduct}
+                    {pageLocalization.admin.editProduct}
                   </Button>
                 </Grid>
               </Grid>

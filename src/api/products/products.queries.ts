@@ -1,6 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import {
   deleteProductApi,
+  editProductApi,
   getAllProductsApi,
   getProductByIdApi,
   getProductsByCategoryIdApi,
@@ -16,32 +17,32 @@ export function useGetAllProducts(page: number) {
   });
 }
 
-export const useGetProductsByCategoryId = (categoryId: string) => {
+export function useGetProductsByCategoryId(categoryId: string) {
   return useQuery({
     queryKey: ["products", "category", categoryId],
     queryFn: () => getProductsByCategoryIdApi(categoryId),
   });
-};
+}
 
-export const useGetProductById = (productId: string) => {
+export function useGetProductById(productId: string) {
   return useQuery({
     queryKey: ["product", productId],
     queryFn: () => getProductByIdApi(productId),
   });
-};
+}
 
-export const useGetProductsByPrice = (
+export function useGetProductsByPrice(
   categoryId: string,
   min: number,
   max: number
-) => {
+) {
   return useQuery({
     queryKey: ["products", categoryId, min, max],
     queryFn: () => getProductsByPriceApi(categoryId, min, max),
     enabled: !!min && !!max && !!categoryId,
     refetchOnMount: "always",
   });
-};
+}
 
 export function usePostProduct() {
   const queryClient = useQueryClient();
@@ -62,6 +63,24 @@ export function useDeleteProduct(id: string) {
     onSuccess() {
       queryClient.invalidateQueries({
         queryKey: ["all-products"],
+      });
+    },
+  });
+}
+
+export function useEditProduct(productId: string) {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (product: FormData) => editProductApi(product, productId),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["all-products"],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ["products", "category", productId],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ["product", productId],
       });
     },
   });

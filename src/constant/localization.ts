@@ -38,6 +38,7 @@ export const pageLocalization = {
     quantity: "موجودی",
     priceQuantityTable: "جدول موجودی و قیمت‌ها",
     addProduct: "افزودن کالا",
+    editProduct: "ویرایش کالا",
     save: "ذخیره",
     ordersTable: "جدول سفارش‌ها",
     fullName: "نام کاربر",
@@ -58,6 +59,7 @@ export const pageLocalization = {
     brand: "برند",
     addProductSuccess: "کالا با موفقیت اضافه شد",
     deleteProductSuccess: "کالا با موفقیت حذف شد",
+    editProductSuccess: "کالا با موفقیت ویرایش شد",
     confirmDeleteProduct: "آیا از حذف کالا مطمئن هستید؟",
   },
 };
