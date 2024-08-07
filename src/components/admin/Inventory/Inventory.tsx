@@ -1,7 +1,6 @@
 import { useGetAllProducts } from "@/api/products/products.queries";
 import { pageLocalization } from "@/constant/localization";
 import {
-  Button,
   Paper,
   Stack,
   Table,
@@ -14,6 +13,7 @@ import { useState } from "react";
 import TableHeadRow from "./TableHeadRows/TableHeadRow";
 import TableBodyRows from "./TableBodyRows/TableBodyRows";
 import PaginationCom from "@/components/shared/Pagination/Pagination";
+import EditPriceQuantity from "./EditPriceQuantity/EditPriceQuantity";
 
 export default function Inventory() {
   const [page, setPage] = useState(1);
@@ -28,13 +28,7 @@ export default function Inventory() {
       p={2}
       position="relative"
     >
-      <Button
-        variant="contained"
-        color="success"
-        sx={{ position: "absolute", right: 40, top: 20 }}
-      >
-        {pageLocalization.admin.save}
-      </Button>
+      <EditPriceQuantity />
       <Typography variant="h5" fontWeight={900}>
         {pageLocalization.admin.priceQuantityTable}
       </Typography>

@@ -98,3 +98,16 @@ export type OrderType = {
   createdAt: string;
   updatedAt: string;
 };
+
+export type InventoryProductType = {
+  id: string;
+  rank: number;
+  productName: string;
+  price: number;
+  quantity: number;
+};
+
+export type EditProductType = {
+  product: FormData;
+  productId: string;
+};

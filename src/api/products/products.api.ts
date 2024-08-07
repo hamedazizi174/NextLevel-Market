@@ -1,3 +1,4 @@
+import { EditProductType } from "@/types/types";
 import { api } from "../config.api";
 
 export async function getAllProductsApi(page: number) {
@@ -36,7 +37,7 @@ export async function deleteProductApi(id: string) {
   return res.data;
 }
 
-export async function editProductApi(product: FormData, productId: string) {
+export async function editProductApi({ product, productId }: EditProductType) {
   const res = await api.patch(`/products/${productId}`, product);
   return res.data;
 }

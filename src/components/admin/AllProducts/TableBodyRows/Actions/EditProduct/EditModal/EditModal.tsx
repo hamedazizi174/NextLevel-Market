@@ -42,7 +42,7 @@ export default function EditModal({ open, closeModal, id }: Props) {
   const [selectedCategoryId, setSelectedCategoryId] = useState("");
   const { data: categories } = useGetCategories();
   const { data: subcategories } = useGetSubcategories(selectedCategoryId);
-  const { mutate: editProductMutate } = useEditProduct(id);
+  const { mutate: editProductMutate } = useEditProduct();
 
   function editProduct(data: FieldValues) {
     const formData = new FormData();
@@ -53,7 +53,7 @@ export default function EditModal({ open, closeModal, id }: Props) {
         ? formData.append("images", data.images[0])
         : null;
     });
-    editProductMutate(formData);
+    editProductMutate({ product: formData, productId: id });
     reset();
     closeModal();
     toast.success(pageLocalization.admin.editProductSuccess);

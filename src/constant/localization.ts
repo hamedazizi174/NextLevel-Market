@@ -60,6 +60,8 @@ export const pageLocalization = {
     addProductSuccess: "کالا با موفقیت اضافه شد",
     deleteProductSuccess: "کالا با موفقیت حذف شد",
     editProductSuccess: "کالا با موفقیت ویرایش شد",
+    saveEditSuccess: "تغییرات با موفقیت ذخیره شدند",
     confirmDeleteProduct: "آیا از حذف کالا مطمئن هستید؟",
+    confirmEditProducts: "آیا از ذخیره تغییرات مطمئن هستید؟",
   },
 };

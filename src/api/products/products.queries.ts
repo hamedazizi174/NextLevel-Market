@@ -8,6 +8,7 @@ import {
   getProductsByPriceApi,
   postProductApi,
 } from "./products.api";
+import { EditProductType } from "@/types/types";
 
 export function useGetAllProducts(page: number) {
   return useQuery({
@@ -68,19 +69,20 @@ export function useDeleteProduct(id: string) {
   });
 }
 
-export function useEditProduct(productId: string) {
+export function useEditProduct() {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: (product: FormData) => editProductApi(product, productId),
+    mutationFn: ({ product, productId }: EditProductType) =>
+      editProductApi({ product, productId }),
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: ["all-products"],
       });
       queryClient.invalidateQueries({
-        queryKey: ["products", "category", productId],
+        queryKey: ["products", "category"],
       });
       queryClient.invalidateQueries({
-        queryKey: ["product", productId],
+        queryKey: ["product"],
       });
     },
   });
