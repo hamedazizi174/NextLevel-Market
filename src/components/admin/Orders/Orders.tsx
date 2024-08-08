@@ -17,8 +17,9 @@ import OrdersStatus from "./OrdersStatus/OrdersStatus";
 
 export default function Orders() {
   const [page, setPage] = useState(1);
+  const [sortBy, setSortBy] = useState("");
   const [ordersStatus, setOrdersStatus] = useState<boolean | undefined>();
-  const { data: allOrders } = useGetAllOrders(page, ordersStatus);
+  const { data: allOrders } = useGetAllOrders(page, ordersStatus, sortBy);
 
   return (
     <Stack
@@ -36,7 +37,7 @@ export default function Orders() {
       <TableContainer component={Paper} sx={{ borderRadius: "25px" }}>
         <Table aria-label="orders table" stickyHeader>
           <TableHead>
-            <TableHeadRow />
+            <TableHeadRow setSortBy={setSortBy} />
           </TableHead>
           <TableBody>
             <TableBodyRows allOrders={allOrders?.data.orders} />

@@ -17,7 +17,7 @@ import EditPriceQuantity from "./EditPriceQuantity/EditPriceQuantity";
 
 export default function Inventory() {
   const [page, setPage] = useState(1);
-  const { data: allProducts } = useGetAllProducts(page);
+  const { data: allProducts } = useGetAllProducts(page, "");
 
   return (
     <Stack

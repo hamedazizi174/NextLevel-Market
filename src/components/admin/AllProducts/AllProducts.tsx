@@ -17,7 +17,8 @@ import PaginationCom from "@/components/shared/Pagination/Pagination";
 
 export default function AllProducts() {
   const [page, setPage] = useState(1);
-  const { data: allProducts } = useGetAllProducts(page);
+  const [sortBy, setSortBy] = useState("");
+  const { data: allProducts } = useGetAllProducts(page, sortBy);
 
   return (
     <Stack
@@ -35,7 +36,7 @@ export default function AllProducts() {
       <TableContainer component={Paper} sx={{ borderRadius: "25px" }}>
         <Table aria-label="all products table" stickyHeader>
           <TableHead>
-            <TableHeadRow />
+            <TableHeadRow setSortBy={setSortBy} />
           </TableHead>
           <TableBody>
             <TableBodyRows allProducts={allProducts?.data.products} />

@@ -10,10 +10,10 @@ import {
 } from "./products.api";
 import { EditProductType } from "@/types/types";
 
-export function useGetAllProducts(page: number) {
+export function useGetAllProducts(page: number, sort: string) {
   return useQuery({
-    queryKey: ["all-products", page],
-    queryFn: () => getAllProductsApi(page),
+    queryKey: ["all-products", sort, page],
+    queryFn: () => getAllProductsApi(page, sort),
     refetchOnMount: "always",
   });
 }

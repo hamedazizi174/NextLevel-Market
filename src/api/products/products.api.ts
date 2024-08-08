@@ -1,18 +1,13 @@
 import { EditProductType } from "@/types/types";
 import { api } from "../config.api";
 
-export async function getAllProductsApi(page: number) {
-  const res = await api.get(`/products?page=${page}`);
-  return res.data;
-}
-
-export async function getProductsByCategoryIdApi(categoryId: string) {
-  const res = await api.get(`/products?category=${categoryId}`);
-  return res.data;
-}
-
-export async function getProductByIdApi(productId: string) {
-  const res = await api.get(`/products?_id=${productId}`);
+export async function getAllProductsApi(page: number, sort: string) {
+  const res = await api.get("/products", {
+    params: {
+      page: page,
+      sort: sort,
+    },
+  });
   return res.data;
 }
 
@@ -24,6 +19,16 @@ export async function getProductsByPriceApi(
   const res = await api.get(
     `/products?category=${categoryId}&price[gte]=${min}&price[lte]=${max}`
   );
+  return res.data;
+}
+
+export async function getProductsByCategoryIdApi(categoryId: string) {
+  const res = await api.get(`/products?category=${categoryId}`);
+  return res.data;
+}
+
+export async function getProductByIdApi(productId: string) {
+  const res = await api.get(`/products?_id=${productId}`);
   return res.data;
 }
 
