@@ -23,7 +23,7 @@ export default function TableHeadRow({ setSortBy }: Props) {
         setSortBy(`-${NAME}`);
         setOrderDir(undefined);
         break;
-      default:
+      case undefined:
         setSortBy("");
         setOrderDir(SORT.ASC);
     }
@@ -49,13 +49,13 @@ export default function TableHeadRow({ setSortBy }: Props) {
           active={true}
           direction={orderDir}
           onClick={requestSort}
-          // IconComponent={
-          //   orderDir === SORT.ASC
-          //     ? RemoveIcon
-          //     : orderDir === SORT.DESC
-          //     ? ArrowDownwardIcon
-          //     : ArrowUpwardIcon
-          // }
+          IconComponent={
+            orderDir === SORT.ASC
+              ? RemoveIcon
+              : orderDir === SORT.DESC
+              ? ArrowDownwardIcon
+              : ArrowUpwardIcon
+          }
         >
           {pageLocalization.admin.productName}
         </TableSortLabel>
