@@ -14,18 +14,38 @@ import { useState } from "react";
 import { toast, Toaster } from "sonner";
 import RemoveIcon from "@mui/icons-material/Remove";
 import AddIcon from "@mui/icons-material/Add";
-import ProductRating from "@/components/products/ProductCard/ProductRating/ProductRating";
+import { usePostToCart } from "@/api/orders/orders.queries";
+import { TOKENS, USER } from "@/constant/general";
+import { useRouter } from "next/router";
+import { ROUTES } from "@/constant/routes";
+import { pageLocalization } from "@/constant/localization";
 
 type prop = {
   productId: string;
 };
 
 export default function ProductTemplate({ productId }: prop) {
+  const isLogin = !!localStorage.getItem(TOKENS.ACCESS);
+  const router = useRouter();
+  // const userStore = useUserStore((state) => state.user);
+  const user = JSON.parse(localStorage.getItem(USER) as string);
   const [qty, setQty] = useState(1);
   const { data: product, isLoading, isError } = useGetProductById(productId);
+  const { mutate: postToCartMutate } = usePostToCart();
 
   function addToCart() {
-    console.log("add to cart");
+    if (isLogin) {
+      console.log(product);
+      const cartProduct = {
+        user: user._id,
+        products: [{ product: product.data.products[0]._id, count: qty }],
+        deliveryStatus: false,
+      };
+      postToCartMutate(cartProduct);
+      toast.success(pageLocalization.cart.addToCartSuccess);
+    } else {
+      router.push(ROUTES.ADMIN);
+    }
   }
 
   function increaseQty() {
@@ -58,7 +78,7 @@ export default function ProductTemplate({ productId }: prop) {
         </Typography>
       )}
       {isError && (
-        <Typography variant="h2">Error Something BAd Happend</Typography>
+        <Typography variant="h2">Error Something Bad Happend</Typography>
       )}
       {product?.data?.products[0] ? (
         <Paper elevation={5} sx={{ borderRadius: "24px" }}>
@@ -118,7 +138,6 @@ export default function ProductTemplate({ productId }: prop) {
                 </Typography>
                 {/* reviews */}
                 <Stack flexDirection="row" mb={3}>
-                  <ProductRating />
                   <Typography variant="body2" marginInlineStart={2}>
                     603 reviews
                   </Typography>

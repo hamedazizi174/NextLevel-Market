@@ -7,12 +7,16 @@ export const localization = {
   totalPrice: "مجموع مبلغ",
   delete: "حذف",
   cancel: "انصراف",
+  hi: "سلام",
 };
 
 export const pageLocalization = {
   home: {
     shopOurTopCategories: "از بهترین مجموعه‌هایمان خرید کنید",
     allCategories: "همه مجموعه‌ها",
+  },
+  cart: {
+    addToCartSuccess: "کالا با موفقیت به سبد خرید افزوده شد",
   },
   signIn: {
     signIn: "ورود",
@@ -27,7 +31,7 @@ export const pageLocalization = {
     inventory: "انبار",
     orders: "مدیریت سفارش‌ها",
     welcome: "به پنل ادمین خوش آمدید",
-    hi: "سلام",
+
     productName: "نام کالا",
     division: "دسته بندی",
     actions: "عملیات",

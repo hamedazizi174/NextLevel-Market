@@ -1,4 +1,3 @@
-import Inventory from "@/components/admin/Inventory/Inventory";
 import { InventoryProductType } from "@/types/types";
 import { create } from "zustand";
 

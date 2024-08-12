@@ -12,24 +12,5 @@ export default function SignInSide() {
         <CreateOrForgot />
       </Box>
     </Stack>
-    // <Grid container justifyContent="center" height="100vh">
-    //   <Grid item xs={12} sm={7} md={6} py={8} maxWidth={500}>
-    //     <Stack px={4}>
-    //       <AvatarAndTitle />
-    //       <SignInForm />
-    //       <CreateOrForgot />
-    //     </Stack>
-    //   </Grid>
-    //   <Grid
-    //     item
-    //     xs={false}
-    //     sm={5}
-    //     md={6}
-    //     sx={{
-    //       backgroundImage: 'url("/signin.jpeg")',
-    //       backgroundSize: "cover",
-    //     }}
-    //   />
-    // </Grid>
   );
 }

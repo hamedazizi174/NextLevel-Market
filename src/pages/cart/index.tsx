@@ -1,5 +1,5 @@
-import { Box } from "@mui/material";
+import CartTemplate from "@/templates/Cart/Cart";
 
 export default function Cart() {
-  return <Box>Cart</Box>;
+  return <CartTemplate />;
 }
