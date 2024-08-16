@@ -50,10 +50,10 @@ export default function TableHeadRow({ setSortBy }: Props) {
           direction={orderDir}
           onClick={requestSort}
           IconComponent={
-            orderDir === SORT.ASC
-              ? RemoveIcon
-              : orderDir === SORT.DESC
-              ? ArrowDownwardIcon
+            orderDir
+              ? orderDir === SORT.ASC
+                ? RemoveIcon
+                : ArrowDownwardIcon
               : ArrowUpwardIcon
           }
         >

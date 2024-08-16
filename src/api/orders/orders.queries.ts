@@ -1,11 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import {
-  deleteCartApi,
-  getAllOrdersApi,
-  postToCartApi,
-  updateCartApi,
-} from "./orders.api";
-import { AddToCartType } from "@/types/types";
+import { deleteCartApi, getAllOrdersApi, updateCartApi } from "./orders.api";
 
 export function useGetAllOrders(
   page: number,
@@ -19,17 +13,17 @@ export function useGetAllOrders(
   });
 }
 
-export const usePostToCart = () => {
-  const queryClient = useQueryClient();
-  return useMutation({
-    mutationFn: (product: AddToCartType) => postToCartApi(product),
-    onSuccess() {
-      queryClient.invalidateQueries({
-        queryKey: ["cart"],
-      });
-    },
-  });
-};
+// export const usePostToCart = () => {
+//   const queryClient = useQueryClient();
+//   return useMutation({
+//     mutationFn: (product: AddToCartType) => postToCartApi(product),
+//     onSuccess() {
+//       queryClient.invalidateQueries({
+//         queryKey: ["cart"],
+//       });
+//     },
+//   });
+// };
 
 export const useDeleteCart = () => {
   const queryClient = useQueryClient();

@@ -1,4 +1,3 @@
-import { AddToCartType } from "@/types/types";
 import { api } from "../config.api";
 
 export async function getAllOrdersApi(
@@ -16,10 +15,10 @@ export async function getAllOrdersApi(
   return res.data;
 }
 
-export async function postToCartApi(product: AddToCartType) {
-  const res = await api.post("/orders", product);
-  return res.data;
-}
+// export async function postToCartApi(product: AddToCartType) {
+//   const res = await api.post("/orders", product);
+//   return res.data;
+// }
 
 export const deleteCartApi = async (id: string) => {
   const response = await api.delete(`/orders/${id}`);

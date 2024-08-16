@@ -115,14 +115,17 @@ export type EditProductType = {
 };
 
 export type AddToCartProductType = {
-  product: string;
+  productId: string;
+  name: string;
   count: number;
+  price: number;
+  image: string;
 };
 
-export type AddToCartType = {
-  user: string;
+export type CartType = {
   products: AddToCartProductType[];
-  deliveryStatus: boolean;
+  userId: string;
+  totalPrice: number;
 };
 
 export interface ShoppingCartItem {

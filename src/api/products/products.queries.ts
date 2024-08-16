@@ -18,10 +18,10 @@ export function useGetAllProducts(page: number, sort: string) {
   });
 }
 
-export function useGetProductsByCategoryId(categoryId: string) {
+export function useGetProductsByCategoryId(page: number, categoryId: string) {
   return useQuery({
-    queryKey: ["products", "category", categoryId],
-    queryFn: () => getProductsByCategoryIdApi(categoryId),
+    queryKey: ["products", "category", categoryId, page],
+    queryFn: () => getProductsByCategoryIdApi(page, categoryId),
   });
 }
 

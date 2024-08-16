@@ -12,15 +12,22 @@ import LoginIcon from "@mui/icons-material/Login";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import GroupsIcon from "@mui/icons-material/Groups";
 import FavoriteIcon from "@mui/icons-material/Favorite";
+import LogoutIcon from "@mui/icons-material/Logout";
 import { ROUTES } from "@/constant/routes";
 import { useEffect, useState } from "react";
 import { TOKENS } from "@/constant/general";
+import Link from "next/link";
+import { useLogout } from "@/api/auth/auth.queries";
 
 export default function Header() {
   const [user, setUser] = useState<string | null>("");
+  const { mutate: logoutMutate } = useLogout();
+
+  const logout = () => logoutMutate();
+
   useEffect(() => {
     setUser(localStorage.getItem(TOKENS.ACCESS));
-  }, []);
+  });
 
   return (
     <Stack
@@ -29,14 +36,21 @@ export default function Header() {
       alignItems="center"
       p="10px"
     >
-      <Image src="/logo.jpeg" alt="logo" width={144} height={60} />
+      <Link href={ROUTES.HOME}>
+        <Image src="/logo.jpeg" alt="logo" width={144} height={60} />
+      </Link>
       <List sx={{ display: "flex" }}>
         {user ? (
-          <ListItem>
-            <ListItemText
-              primary={localization.hi}
-              sx={{ textWrap: "nowrap" }}
-            />
+          <ListItem sx={{ px: "0" }}>
+            <ListItemButton onClick={logout}>
+              <ListItemIcon sx={{ minWidth: { xs: "20px", md: "30px" } }}>
+                <LogoutIcon color="primary" />
+              </ListItemIcon>
+              <ListItemText
+                primary={localization.logOut}
+                sx={{ display: { xs: "none", md: "block" } }}
+              />
+            </ListItemButton>
           </ListItem>
         ) : (
           <ListItem>
@@ -51,7 +65,6 @@ export default function Header() {
             </ListItemButton>
           </ListItem>
         )}
-
         <ListItem>
           <ListItemButton LinkComponent={"a"} href={ROUTES.CART}>
             <ListItemIcon sx={{ minWidth: 30 }}>

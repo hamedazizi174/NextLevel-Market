@@ -11,4 +11,7 @@ export const ROUTES = {
   PRODUCT: "/product",
   PRODUCTS: "/products",
   ADMIN: "/admin",
+  PAYMENT: "/payment",
+  SUCCESS_PAYMENT: "/success-payment",
+  FAIL_PAYMENT: "/fail-payment",
 };

@@ -14,11 +14,12 @@ import { useState } from "react";
 import { toast, Toaster } from "sonner";
 import RemoveIcon from "@mui/icons-material/Remove";
 import AddIcon from "@mui/icons-material/Add";
-import { usePostToCart } from "@/api/orders/orders.queries";
-import { TOKENS, USER } from "@/constant/general";
+import { TOKENS } from "@/constant/general";
 import { useRouter } from "next/router";
 import { ROUTES } from "@/constant/routes";
 import { pageLocalization } from "@/constant/localization";
+import { useUserStore } from "@/store/userStore";
+import { useCartStore } from "@/store/useCartStore";
 
 type prop = {
   productId: string;
@@ -27,24 +28,30 @@ type prop = {
 export default function ProductTemplate({ productId }: prop) {
   const isLogin = !!localStorage.getItem(TOKENS.ACCESS);
   const router = useRouter();
-  // const userStore = useUserStore((state) => state.user);
-  const user = JSON.parse(localStorage.getItem(USER) as string);
+  const user = useUserStore((state) => state.user);
+  const addToCartStore = useCartStore((state) => state.addToCart);
   const [qty, setQty] = useState(1);
   const { data: product, isLoading, isError } = useGetProductById(productId);
-  const { mutate: postToCartMutate } = usePostToCart();
 
   function addToCart() {
     if (isLogin) {
-      console.log(product);
       const cartProduct = {
-        user: user._id,
-        products: [{ product: product.data.products[0]._id, count: qty }],
-        deliveryStatus: false,
+        userId: user ? user._id : "",
+        products: [
+          {
+            productId: product?.data.products[0]._id,
+            name: product?.data.products[0].name,
+            price: product?.data.products[0].price,
+            image: `http://${product?.data.products[0].images[0]}`,
+            count: qty,
+          },
+        ],
+        totalPrice: qty * product?.data.products[0].price,
       };
-      postToCartMutate(cartProduct);
+      addToCartStore(cartProduct);
       toast.success(pageLocalization.cart.addToCartSuccess);
     } else {
-      router.push(ROUTES.ADMIN);
+      router.push(ROUTES.SIGNIN);
     }
   }
 

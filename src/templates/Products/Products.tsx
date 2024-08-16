@@ -4,6 +4,7 @@ import {
   useGetProductsByPrice,
 } from "@/api/products/products.queries";
 import ProductCard from "@/components/products/ProductCard/ProductCard";
+import PaginationCom from "@/components/shared/Pagination/Pagination";
 import { ProductType } from "@/types/types";
 import {
   Box,
@@ -22,6 +23,7 @@ type prop = {
 };
 
 export default function ProductsTemplate({ categoryName }: prop) {
+  const [page, setPage] = useState(1);
   const [min, setMin] = useState(0);
   const [max, setMax] = useState(0);
   const { data: category } = useGetCategoryByName(categoryName);
@@ -34,7 +36,7 @@ export default function ProductsTemplate({ categoryName }: prop) {
     data: products,
     isLoading,
     isError,
-  } = useGetProductsByCategoryId(category?.data.categories[0]._id);
+  } = useGetProductsByCategoryId(page, category?.data.categories[0]._id);
 
   function filterByPrice(e: any) {
     const value = e.target.value;
@@ -169,6 +171,7 @@ export default function ProductsTemplate({ categoryName }: prop) {
             <Typography variant="body1">No products found</Typography>
           )}
         </Box>
+        <PaginationCom page={page} setPage={setPage} items={products} />
       </Grid>
     </Grid>
   );

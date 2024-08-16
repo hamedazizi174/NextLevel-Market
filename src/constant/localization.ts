@@ -8,6 +8,11 @@ export const localization = {
   delete: "حذف",
   cancel: "انصراف",
   hi: "سلام",
+  confirmPayment: "از تایید پرداخت مظمئن هستید؟",
+  yes: "بله",
+  successPayment: "با موفقیت پرداخت شد",
+  failPayment: "پرداخت با شکست مواجه شد",
+  backToHome: "برگشت به خانه",
 };
 
 export const pageLocalization = {
@@ -31,7 +36,6 @@ export const pageLocalization = {
     inventory: "انبار",
     orders: "مدیریت سفارش‌ها",
     welcome: "به پنل ادمین خوش آمدید",
-
     productName: "نام کالا",
     division: "دسته بندی",
     actions: "عملیات",

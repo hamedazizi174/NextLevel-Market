@@ -12,9 +12,9 @@ export default function TableBodyRows({ allOrders }: Props) {
     return {
       id: order._id,
       rank: rank++,
-      fullName: `${order.user.firstname} ${order.user.lastname}`,
-      totalPrice: order.totalPrice,
-      orderTime: order.createdAt,
+      fullName: `${order?.user?.firstname} ${order?.user?.lastname}`,
+      totalPrice: order?.totalPrice,
+      orderTime: order?.createdAt,
       orderCheck: pageLocalization.admin.orderCheck,
     };
   });

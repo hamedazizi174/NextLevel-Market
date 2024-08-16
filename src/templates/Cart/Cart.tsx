@@ -1,26 +1,17 @@
 import OrderDetails from "@/components/cart/Invoice/Invoice";
 import PaymentTemplate from "@/components/cart/PaymentTemplate/PaymentTemplate";
 import ShippingTemplate from "@/components/cart/ShippingTemplate/ShippingTemplate";
-import ShoppingCartTemplate from "@/components/cart/ShoppingCartTemplate/ShoppingCartTemplate";
-import SpecificationsTemplate from "@/components/cart/SpecificationsTemplate/SpecificationsTemplate";
+import ShoppingCart from "@/components/cart/ShoppingCartTemplate/ShoppingCartTemplate";
 import { useCheckoutStore } from "@/store/checkoutStore";
-import { Box, Step, StepLabel, Stepper } from "@mui/material";
+import { Step, StepLabel, Stepper } from "@mui/material";
 import { useState } from "react";
 
-export const steps = [
-  "Cart",
-  "Specifications",
-  "Shipping",
-  "payment",
-  "Invoice Preview",
-];
+export const steps = ["سبد خرید", "نحوه ارسال", "پرداخت"];
 
 export const nextButtonLabels = [
-  "Go to Specifications",
-  "Go to Shipping",
-  "Go to Payment",
-  "Go Invoice Preview",
-  "Finish",
+  "رفتن به نحوه ارسال",
+  "رفتن به پرداخت",
+  "پایان",
 ];
 
 export default function CartTemplate() {
@@ -33,7 +24,7 @@ export default function CartTemplate() {
   };
 
   return (
-    <Box sx={{ width: "100%" }}>
+    <>
       <Stepper activeStep={activeStep}>
         {steps.map((label, index) => {
           const stepProps: { completed?: boolean } = {};
@@ -52,14 +43,12 @@ export default function CartTemplate() {
         })}
       </Stepper>
       {activeStep === 0 ? (
-        <ShoppingCartTemplate />
+        <ShoppingCart />
       ) : activeStep === 1 ? (
         <ShippingTemplate />
-      ) : activeStep === 2 ? (
-        <PaymentTemplate />
       ) : (
-        <OrderDetails />
+        <PaymentTemplate />
       )}
-    </Box>
+    </>
   );
 }

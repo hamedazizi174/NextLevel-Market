@@ -22,8 +22,16 @@ export async function getProductsByPriceApi(
   return res.data;
 }
 
-export async function getProductsByCategoryIdApi(categoryId: string) {
-  const res = await api.get(`/products?category=${categoryId}`);
+export async function getProductsByCategoryIdApi(
+  page: number,
+  categoryId: string
+) {
+  const res = await api.get(`/products`, {
+    params: {
+      page: page,
+      category: categoryId,
+    },
+  });
   return res.data;
 }
 

@@ -10,7 +10,7 @@ import Grid from "@mui/material/Grid";
 import DeleteIcon from "@mui/icons-material/Delete";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import { useCheckoutStore } from "@/store/checkoutStore";
@@ -20,14 +20,16 @@ import {
   useGetAllOrders,
   useUpdateCart,
 } from "@/api/orders/orders.queries";
+import { useCartStore } from "@/store/useCartStore";
+import { useUserStore } from "@/store/userStore";
+import { AddToCartProductType } from "@/types/types";
 
-function ShoppingCartTemplate() {
-  const { activeStep, setActiveStep, setShoppingCartInfo, shoppingCartInfo } =
-    useCheckoutStore();
-  const [totalPrice, setTotalPrice] = useState(0);
-  const { mutate: updateMutate } = useUpdateCart();
-  const [loading, setLoading] = useState(true);
-  const { data } = useGetAllOrders(1, false, "");
+export default function ShoppingCart() {
+  const { cart, removeFromCart, updateCount } = useCartStore();
+  const { user } = useUserStore();
+  const userCartIndex = cart.findIndex((item) => item.userId === user?._id);
+  const { activeStep, setActiveStep, shoppingCartInfo } = useCheckoutStore();
+  // const [totalPrice, setTotalPrice] = useState(0);
 
   // useEffect(() => {
   //   const fetchData = async () => {
@@ -79,80 +81,100 @@ function ShoppingCartTemplate() {
     setActiveStep(activeStep - 1);
   };
 
-  const { mutate } = useDeleteCart();
+  // const { mutate } = useDeleteCart();
 
-  const handleRemove = (id: string) => {
-    mutate(id);
-  };
+  // const handleRemove = (id: string) => {
+  //   mutate(id);
+  // };
 
-  const handleRemoveQuantity = (productInCart: any) => {
-    const newQty = productInCart.qty - 1;
-    if (newQty === 0) {
-      handleRemove(productInCart.id);
-    } else {
-      const newProduct = { ...productInCart, qty: newQty };
-      updateMutate(newProduct);
-      setTotalPrice((old) => old - newProduct.price);
-    }
-  };
   return (
     <Box sx={{ p: 2 }}>
       <Grid container spacing={2}>
-        {data?.data?.orders ? (
-          data?.data?.orders?.map((product: any) => (
-            <Grid item xs={12} key={product.id}>
-              <Card
-                sx={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                  p: 2,
-                  border: 1,
-                  boxShadow: 5,
-                }}
-              >
-                <CardMedia
-                  component="img"
-                  sx={{ width: 150 }}
-                  image={product.image}
-                  alt={product.name}
-                />
-                <Box sx={{ display: "flex", flexDirection: "column", flex: 1 }}>
-                  <CardContent>
-                    <Typography component="div" variant="h5">
-                      {product.name}
-                    </Typography>
-
-                    <Typography
-                      variant="subtitle1"
-                      color="text.primary"
-                      component="div"
-                    >
-                      ${product.price}
-                    </Typography>
-                  </CardContent>
-                  <Box
-                    sx={{ display: "flex", alignItems: "center", pl: 2, pb: 2 }}
-                  >
-                    <IconButton onClick={() => handleRemoveQuantity(product)}>
-                      <RemoveIcon />
-                    </IconButton>
-                    <Typography sx={{ mx: 2 }}>{product.qty}</Typography>
-                    <IconButton onClick={() => console.log("add qty")}>
-                      <AddIcon />
-                    </IconButton>
-                  </Box>
-                </Box>
-                <Button
-                  variant="outlined"
-                  startIcon={<DeleteIcon />}
-                  onClick={() => handleRemove(product.id)}
+        {userCartIndex !== -1 ? (
+          cart[userCartIndex].products.map(
+            (product: AddToCartProductType, index) => (
+              <Grid item xs={12} key={product.productId}>
+                <Card
+                  sx={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    p: 2,
+                    border: 1,
+                    boxShadow: 5,
+                  }}
                 >
-                  Delete
-                </Button>
-              </Card>
-            </Grid>
-          ))
+                  <CardMedia
+                    component="img"
+                    sx={{ width: 150 }}
+                    image={product.image}
+                    alt={product.name}
+                  />
+                  <Box
+                    sx={{ display: "flex", flexDirection: "column", flex: 1 }}
+                  >
+                    <CardContent>
+                      <Typography component="div" variant="h5">
+                        {product.name}
+                      </Typography>
+                      <Typography
+                        variant="subtitle1"
+                        color="text.primary"
+                        component="div"
+                      >
+                        ${product.price}
+                      </Typography>
+                    </CardContent>
+                    <Box
+                      sx={{
+                        display: "flex",
+                        alignItems: "center",
+                        pl: 2,
+                        pb: 2,
+                      }}
+                    >
+                      <IconButton
+                        onClick={() =>
+                          updateCount({
+                            products: [product],
+                            userId: user ? user._id : "",
+                            totalPrice: cart[userCartIndex].totalPrice,
+                          })
+                        }
+                      >
+                        <RemoveIcon />
+                      </IconButton>
+                      <Typography sx={{ mx: 2 }}>{product.count}</Typography>
+                      <IconButton
+                        onClick={() =>
+                          updateCount({
+                            products: [product],
+                            userId: user ? user._id : "",
+                            totalPrice: cart[userCartIndex].totalPrice,
+                          })
+                        }
+                      >
+                        <AddIcon />
+                      </IconButton>
+                    </Box>
+                  </Box>
+                  <Button
+                    variant="outlined"
+                    startIcon={<DeleteIcon />}
+                    onClick={() =>
+                      removeFromCart({
+                        products: [product],
+                        userId: user ? user._id : "",
+                        totalPrice: cart[userCartIndex].totalPrice,
+                      })
+                    }
+                  >
+                    Delete
+                  </Button>
+                </Card>
+              </Grid>
+            )
+          )
         ) : (
           <Box>No products in the cart.</Box>
         )}
@@ -163,8 +185,7 @@ function ShoppingCartTemplate() {
           display: "flex",
           flexDirection: "row",
           pt: 2,
-          pl: 4,
-          pr: 4,
+          px: 4,
           justifyContent: "space-between",
           alignItems: "center",
         }}
@@ -173,27 +194,27 @@ function ShoppingCartTemplate() {
           variant="contained"
           disabled={activeStep === 0}
           onClick={handleBack}
-          startIcon={<ArrowBackIosNewIcon />}
+          startIcon={<ArrowForwardIosIcon />}
         >
           {activeStep === 0
-            ? "Back"
+            ? "برگشت"
             : activeStep === 1
-            ? "Go to Cart"
+            ? "برگشت به سبد خرید"
             : ` ${nextButtonLabels[activeStep - 2]}`}
         </Button>
-        <Typography variant="h6">Total: ${totalPrice}</Typography>
+        <Typography variant="h6">
+          Total: ${cart[userCartIndex]?.totalPrice}
+        </Typography>
         <Button
-          endIcon={<ArrowForwardIosIcon />}
+          endIcon={<ArrowBackIosNewIcon />}
           variant="contained"
           onClick={handleNext}
         >
           {activeStep === steps.length - 1
-            ? "Finish"
+            ? "پایان"
             : nextButtonLabels[activeStep]}
         </Button>
       </Box>
     </Box>
   );
 }
-
-export default ShoppingCartTemplate;

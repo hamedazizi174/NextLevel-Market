@@ -16,6 +16,7 @@ import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import { useCheckoutStore } from "@/store/checkoutStore";
 import { nextButtonLabels, steps } from "@/templates/Cart/Cart";
+import { ROUTES } from "@/constant/routes";
 
 const paymentOptions = [
   {
@@ -68,7 +69,7 @@ const SelectButton = styled(Button)(({ theme }) => ({
   },
 }));
 
-const PaymentTemplate: React.FC = () => {
+export default function PaymentTemplate() {
   const {
     activeStep,
     setActiveStep,
@@ -111,13 +112,6 @@ const PaymentTemplate: React.FC = () => {
     }
   };
   const [error, setError] = React.useState<string>("");
-  const handleNext = () => {
-    if (selectedOptionpayment) {
-      setActiveStep(activeStep + 1);
-    } else {
-      setError("Please select a payment option before proceeding.");
-    }
-  };
 
   const handleBack = () => {
     setActiveStep(activeStep - 1);
@@ -206,26 +200,18 @@ const PaymentTemplate: React.FC = () => {
           variant="contained"
           disabled={activeStep === 0}
           onClick={handleBack}
-          startIcon={<ArrowBackIosNewIcon />}
+          startIcon={<ArrowForwardIosIcon />}
         >
-          {activeStep === 0
-            ? "Back"
-            : activeStep === 1
-            ? "Go to Cart"
-            : ` ${nextButtonLabels[activeStep - 2]}`}
+          {"برگشت"}
         </Button>
         <Button
-          endIcon={<ArrowForwardIosIcon />}
+          endIcon={<ArrowBackIosNewIcon />}
           variant="contained"
-          onClick={handleNext}
+          href={ROUTES.PAYMENT}
         >
-          {activeStep === steps.length - 1
-            ? "Finish"
-            : nextButtonLabels[activeStep]}
+          {"پرداخت"}
         </Button>
       </Box>
     </Box>
   );
-};
-
-export default PaymentTemplate;
+}

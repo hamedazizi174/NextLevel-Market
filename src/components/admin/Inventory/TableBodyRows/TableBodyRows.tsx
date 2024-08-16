@@ -10,6 +10,7 @@ type Props = {
 
 export default function TableBodyRows({ allProducts }: Props) {
   let rank = 1;
+  const data = useInventoryStore((state) => state.inventory);
   const updateInventoryStore = useInventoryStore((state) => state.update);
   const resetInventoryStore = useInventoryStore((state) => state.reset);
   const [rowIndex, setRowIndex] = useState(-1);

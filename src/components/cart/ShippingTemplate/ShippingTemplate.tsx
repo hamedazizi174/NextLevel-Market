@@ -213,16 +213,12 @@ const ShippingTemplate: React.FC = () => {
           variant="contained"
           disabled={activeStep === 0}
           onClick={handleBack}
-          startIcon={<ArrowBackIosNewIcon />}
+          startIcon={<ArrowForwardIosIcon />}
         >
-          {activeStep === 0
-            ? "Back"
-            : activeStep === 1
-            ? "Go to Cart"
-            : ` ${nextButtonLabels[activeStep - 2]}`}
+          {"برگشت"}
         </Button>
         <Button
-          endIcon={<ArrowForwardIosIcon />}
+          endIcon={<ArrowBackIosNewIcon />}
           variant="contained"
           onClick={handleNext}
         >
