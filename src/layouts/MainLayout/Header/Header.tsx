@@ -4,8 +4,8 @@ import {
   ListItem,
   ListItemButton,
   ListItemIcon,
-  ListItemText,
   Stack,
+  TextField,
 } from "@mui/material";
 import Image from "next/image";
 import LoginIcon from "@mui/icons-material/Login";
@@ -13,6 +13,7 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import GroupsIcon from "@mui/icons-material/Groups";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import LogoutIcon from "@mui/icons-material/Logout";
+import SearchIcon from "@mui/icons-material/Search";
 import { ROUTES } from "@/constant/routes";
 import { useEffect, useState } from "react";
 import { TOKENS } from "@/constant/general";
@@ -35,67 +36,57 @@ export default function Header() {
       justifyContent="space-between"
       alignItems="center"
       p="10px"
+      gap="20px"
     >
       <Link href={ROUTES.HOME}>
-        <Image src="/logo.jpeg" alt="logo" width={144} height={60} />
+        <Image src="/logo.jpeg" alt="logo" width={134} height={50} />
       </Link>
-      <List sx={{ display: "flex" }}>
+      <TextField
+        type="search"
+        label={localization.search}
+        variant="filled"
+        size="small"
+        InputProps={{ endAdornment: <SearchIcon color="primary" /> }}
+        sx={{ maxWidth: "50%" }}
+        fullWidth
+      />
+      <List sx={{ display: "flex" }} disablePadding>
         {user ? (
-          <ListItem sx={{ px: "0" }}>
+          <ListItem sx={{ px: "0" }} disablePadding>
             <ListItemButton onClick={logout}>
               <ListItemIcon sx={{ minWidth: { xs: "20px", md: "30px" } }}>
                 <LogoutIcon color="primary" />
               </ListItemIcon>
-              <ListItemText
-                primary={localization.logOut}
-                sx={{ display: { xs: "none", md: "block" } }}
-              />
             </ListItemButton>
           </ListItem>
         ) : (
-          <ListItem>
+          <ListItem disablePadding>
             <ListItemButton LinkComponent={"a"} href={ROUTES.SIGNIN}>
               <ListItemIcon sx={{ minWidth: 30 }}>
                 <LoginIcon color="primary" />
               </ListItemIcon>
-              <ListItemText
-                primary={localization.signInSignUp}
-                sx={{ textWrap: "nowrap" }}
-              />
             </ListItemButton>
           </ListItem>
         )}
-        <ListItem>
+        <ListItem disablePadding>
           <ListItemButton LinkComponent={"a"} href={ROUTES.CART}>
             <ListItemIcon sx={{ minWidth: 30 }}>
               <ShoppingCartIcon color="primary" />
             </ListItemIcon>
-            <ListItemText
-              primary={localization.cart}
-              sx={{ textWrap: "nowrap" }}
-            />
           </ListItemButton>
         </ListItem>
-        <ListItem>
+        <ListItem disablePadding>
           <ListItemButton LinkComponent={"a"} href="#">
             <ListItemIcon sx={{ minWidth: 30 }}>
               <FavoriteIcon color="primary" />
             </ListItemIcon>
-            <ListItemText
-              primary={localization.wishlist}
-              sx={{ textWrap: "nowrap" }}
-            />
           </ListItemButton>
         </ListItem>
-        <ListItem>
+        <ListItem disablePadding>
           <ListItemButton LinkComponent={"a"} href="#">
             <ListItemIcon sx={{ minWidth: 30 }}>
               <GroupsIcon color="primary" />
             </ListItemIcon>
-            <ListItemText
-              primary={localization.aboutUs}
-              sx={{ textWrap: "nowrap" }}
-            />
           </ListItemButton>
         </ListItem>
       </List>

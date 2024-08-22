@@ -13,6 +13,7 @@ export const localization = {
   successPayment: "با موفقیت پرداخت شد",
   failPayment: "پرداخت با شکست مواجه شد",
   backToHome: "برگشت به خانه",
+  search: "جستجو",
 };
 
 export const pageLocalization = {
