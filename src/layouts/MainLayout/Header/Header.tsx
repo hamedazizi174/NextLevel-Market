@@ -46,7 +46,11 @@ export default function Header() {
         label={localization.search}
         variant="filled"
         size="small"
-        InputProps={{ endAdornment: <SearchIcon color="primary" /> }}
+        InputProps={{
+          endAdornment: <SearchIcon color="primary" />,
+          sx: { borderRadius: "15px" },
+          disableUnderline: true,
+        }}
         sx={{ maxWidth: "50%" }}
         fullWidth
       />

@@ -5,7 +5,7 @@ import { ChildrenType } from "@/types/types";
 
 export default function MainLayout({ children }: ChildrenType) {
   return (
-    <Box>
+    <Box maxWidth={1500} mx="auto">
       <Header />
       {children}
       <Footer />

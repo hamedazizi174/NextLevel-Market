@@ -6,7 +6,7 @@ import SideBar from "./SideBar/SideBar";
 
 export default function AdminLayout({ children }: ChildrenType) {
   return (
-    <Grid container minHeight="100vh">
+    <Grid container minHeight="100vh" maxWidth={1500} mx="auto">
       <Grid item xs={12}>
         <Header />
       </Grid>
