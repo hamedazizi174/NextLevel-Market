@@ -10,7 +10,6 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import Link from "next/link";
 
 export default function Categories() {
   const { data: categories } = useGetCategories();

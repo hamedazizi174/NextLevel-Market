@@ -20,6 +20,9 @@ export const pageLocalization = {
   home: {
     shopOurTopCategories: "از بهترین مجموعه‌هایمان خرید کنید",
     allCategories: "همه مجموعه‌ها",
+    bestSelling: "پر فروش ترین محصولات",
+    showAll: "نمایش همه",
+    bestBrand: "بهترین برندها",
   },
   cart: {
     addToCartSuccess: "کالا با موفقیت به سبد خرید افزوده شد",

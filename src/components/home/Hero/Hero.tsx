@@ -33,9 +33,6 @@ export default function Hero() {
         <Image src="/hero/tech.jpg" alt="tech" fill />
       </SwiperSlide>
       <SwiperSlide style={{ height: "400px" }}>
-        <Image src="/hero/a.webp" alt="a" fill />
-      </SwiperSlide>
-      <SwiperSlide style={{ height: "400px" }}>
         <Image src="/hero/b.webp" alt="b" fill />
       </SwiperSlide>
     </Swiper>
