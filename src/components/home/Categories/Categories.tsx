@@ -32,7 +32,7 @@ export default function Categories() {
           {categories?.data.categories.map(
             (category: CategoryType, index: number) => {
               return (
-                <Card sx={{ borderRadius: 3 }} key={category._id}>
+                <Card sx={{ borderRadius: 3 }} elevation={6} key={category._id}>
                   <CardActionArea href={`/categories/${category?.name}`}>
                     <CardMedia
                       image={`http://localhost:8000/images/categories/icons/${category?.icon}`}

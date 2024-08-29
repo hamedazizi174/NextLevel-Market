@@ -9,12 +9,18 @@ import {
 } from "@mui/material";
 
 const brands = [
-  "/brands/nike.png",
   "/brands/adidas.png",
-  "/brands/levis.jpg",
-  "/brands/puma.png",
-  "/brands/solomon.jpg",
-  "/brands/zara.webp",
+  "/brands/asos.png",
+  "/brands/cotopaxi.png",
+  "/brands/hanifa.png",
+  "/brands/nike.png",
+  "/brands/patagonia.jpg",
+  "/brands/raymond.png",
+  "/brands/samsung.jpg",
+  "/brands/skechers.jpg",
+  "/brands/solomon.png",
+  "/brands/dell.png",
+  "/brands/asus.png",
 ];
 
 export default function BestBrands() {
@@ -28,16 +34,15 @@ export default function BestBrands() {
           {pageLocalization.home.showAll}
         </Typography>
       </Stack>
-      <Grid container spacing={8}>
+      <Grid container spacing={3}>
         {brands.map((brand, index) => (
-          <Grid item xs={12} md={6} lg={4} key={index}>
-            <Card sx={{ borderRadius: 3 }}>
+          <Grid item xs={12} md={6} lg={3} key={index}>
+            <Card sx={{ borderRadius: 3 }} elevation={6}>
               <CardActionArea>
                 <CardMedia
                   image={brand}
                   sx={{
                     height: "100px",
-                    // width: "200px",
                     transition: "transform 0.5s ease",
                     "&:hover": {
                       transform: "scale(1.1)",

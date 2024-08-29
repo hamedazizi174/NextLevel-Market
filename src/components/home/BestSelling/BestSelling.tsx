@@ -18,6 +18,7 @@ import { useGetAllProducts } from "@/api/products/products.queries";
 
 export default function BestSelling() {
   const { data: bestSellingProducts } = useGetAllProducts(10, "");
+
   return (
     <Box mb={5} p={4}>
       <Stack gap={3}>
