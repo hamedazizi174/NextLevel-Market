@@ -1,6 +1,6 @@
 import {
-  useGetAllProducts,
   useGetProductById,
+  useGetSimilarProducts,
 } from "@/api/products/products.queries";
 import {
   Box,
@@ -14,7 +14,7 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import { purple, red } from "@mui/material/colors";
+import { red } from "@mui/material/colors";
 import Image from "next/image";
 import { useState } from "react";
 import { toast, Toaster } from "sonner";
@@ -28,6 +28,7 @@ import { useUserStore } from "@/store/userStore";
 import { useCartStore } from "@/store/useCartStore";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { ProductType } from "@/types/types";
+import Comment from "@/components/product/Comment/Comment";
 
 type prop = {
   productId: string;
@@ -39,8 +40,11 @@ export default function ProductTemplate({ productId }: prop) {
   const user = useUserStore((state) => state.user);
   const addToCartStore = useCartStore((state) => state.addToCart);
   const [qty, setQty] = useState(1);
-  const { data: product, isLoading, isError } = useGetProductById(productId);
-  const { data: similarProducts } = useGetAllProducts(18, "");
+  const { data: product } = useGetProductById(productId);
+  const { data: similarProducts } = useGetSimilarProducts(
+    product?.data.products[0].category._id,
+    product?.data.products[0].subcategory._id
+  );
 
   function addToCart() {
     if (isLogin) {
@@ -68,7 +72,7 @@ export default function ProductTemplate({ productId }: prop) {
     if (product.data.products[0] && qty < product.data.products[0]?.quantity) {
       setQty((prev) => (prev += 1));
     } else {
-      toast.error("You Can't Add More Than Stuck", {
+      toast.error("بیشتر از انبار نمیتوان اضافه کرد", {
         className: "bg-red-400 text-white",
         position: "top-left",
       });
@@ -79,7 +83,7 @@ export default function ProductTemplate({ productId }: prop) {
     if (qty > 1) {
       setQty((prev) => (prev -= 1));
     } else {
-      toast.error("Min Number is 1", {
+      toast.error("کمترین تعداد 1 است", {
         className: "bg-red-400 text-white",
         position: "top-left",
       });
@@ -87,45 +91,48 @@ export default function ProductTemplate({ productId }: prop) {
   }
 
   return (
-    <Box component="main" sx={{ py: 10, px: 20 }}>
+    <Box component="main" sx={{ py: 5, px: 10 }}>
       {product?.data?.products[0] ? (
         <Paper elevation={5} sx={{ borderRadius: "24px", overflow: "hidden" }}>
-          <Stack flexDirection="row" flexWrap="wrap">
+          <Stack flexDirection="row" gap={7}>
             <Toaster richColors />
-            <Box position="relative" sx={{ width: "50%" }}>
+            <Box sx={{ width: "50%" }}>
               <Image
-                style={{ flexGrow: 1, borderRadius: "24px 0 0 24px" }}
                 src={`http://${product?.data?.products[0]?.images[0]}`}
                 alt={product?.data?.products[0]?.name}
-                fill
-                objectFit="cover"
+                width={600}
+                height={600}
               />
             </Box>
-            <Box
-              sx={{
-                paddingInlineStart: { lg: 10 },
-                width: { lg: "50%" },
-              }}
-            >
+            <Stack>
               <Typography
                 variant="h2"
                 fontWeight="900"
                 fontSize="2.25rem"
                 mt={5}
-                mb={6}
+                mb={4}
               >
                 نام محصول : {product?.data?.products[0]?.name}
               </Typography>
-              <Stack direction="row" alignItems="center" mb={5}>
+              <Typography variant="h2" fontWeight="800" fontSize="2rem" mb={4}>
+                نام برند : {product?.data?.products[0]?.brand}
+              </Typography>
+              <Stack direction="row" mb={3} gap={4}>
+                <Typography variant="h2" fontWeight="800" fontSize="2rem">
+                  مجموعه : {product?.data?.products[0]?.category.name}
+                </Typography>
+                <Typography variant="h2" fontWeight="800" fontSize="2rem">
+                  زیر مجموعه : {product?.data?.products[0]?.subcategory.name}
+                </Typography>
+              </Stack>
+              <Stack direction="row" alignItems="center" mb={3}>
+                <Typography variant="h5">افزودن به علاقه مندی ها</Typography>
                 <IconButton aria-label="wishlist">
                   <FavoriteBorderIcon />
                 </IconButton>
-                <Typography variant="h6">افزودن به علاقه مندی ها</Typography>
               </Stack>
-              <Typography variant="h5" mb={2}>
-                تعداد
-              </Typography>
-              <Stack direction="row" alignItems="center" gap={2}>
+              <Stack direction="row" alignItems="center" gap={2} mb={3}>
+                <Typography variant="h5">تعداد :</Typography>
                 <IconButton aria-label="remove" onClick={decreaseQty}>
                   <RemoveIcon />
                 </IconButton>
@@ -138,21 +145,18 @@ export default function ProductTemplate({ productId }: prop) {
                     موجود نیست
                   </Typography>
                 ) : (
-                  <Typography variant="body1">
+                  <Typography variant="h6">
                     {product?.data?.products[0]?.quantity} عدد درانبار
                   </Typography>
                 )}
               </Stack>
-              <Stack py={3} pr={3}>
-                <Typography variant="h3" fontSize="1.875rem" mb={5}>
-                  {product?.data?.products[0]?.price?.toFixed(2)} تومان
+              <Stack>
+                <Typography variant="h5" mb={3}>
+                  9 نظر
                 </Typography>
-                {/* reviews */}
-                <Stack flexDirection="row" mb={5}>
-                  <Typography variant="body1" marginInlineStart={2}>
-                    603 نظر
-                  </Typography>
-                </Stack>
+                <Typography variant="h5" mb={3}>
+                  {product?.data?.products[0]?.price} تومان
+                </Typography>
                 <Button
                   variant="contained"
                   sx={{
@@ -160,9 +164,9 @@ export default function ProductTemplate({ productId }: prop) {
                     px: 10,
                     borderRadius: 8,
                     color: "white",
-                    ":hover": {
-                      bgcolor: purple[600],
-                    },
+                    fontSize: "20px",
+                    fontWeight: "bold",
+                    maxWidth: "400px",
                   }}
                   onClick={addToCart}
                   disabled={!product?.data?.products[0]?.quantity}
@@ -170,9 +174,12 @@ export default function ProductTemplate({ productId }: prop) {
                   افزودن به سبد خرید
                 </Button>
               </Stack>
-            </Box>
+            </Stack>
           </Stack>
-          <Typography variant="body1" my={5} p={3}>
+          <Typography variant="h5" mb={3} px={4}>
+            توضیحات محصول :
+          </Typography>
+          <Typography variant="body1" fontSize="1.5rem" mb={5} px={4}>
             شرکت هوآوی به عنوان یکی از شرکت‌های مطرح فعال در حوزه تکنولوژی
             شناخته می‌شود و محصولات این شرکت از محبوبیت بالایی برخوردار هستند.
             مانیتور Mateview SE محصول کمپانی Huawei با پوشش 90 درصدی محدوده رنگی
@@ -226,7 +233,7 @@ export default function ProductTemplate({ productId }: prop) {
             pb="8px"
             sx={{ overflowX: "scroll" }}
           >
-            {similarProducts?.data.products.map((product: ProductType) => {
+            {similarProducts?.data?.products?.map((product: ProductType) => {
               return (
                 <Card
                   sx={{ borderRadius: 3, minWidth: "230px" }}
@@ -257,6 +264,14 @@ export default function ProductTemplate({ productId }: prop) {
               );
             })}
           </Stack>
+          <Paper elevation={6} sx={{ p: "20px" }}>
+            <Typography variant="h5" mb={3}>
+              نظرهای کاربران
+            </Typography>
+            {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((index) => (
+              <Comment key={index} />
+            ))}
+          </Paper>
         </Stack>
       </Box>
     </Box>

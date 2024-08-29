@@ -11,6 +11,16 @@ export async function getAllProductsApi(page: number, sort: string) {
   return res.data;
 }
 
+export async function getSimilarProductsApi(
+  categoryId: string,
+  subcategoryId: string
+) {
+  const res = await api.get(
+    `/products?category=${categoryId}&subcategory=${subcategoryId}`
+  );
+  return res.data;
+}
+
 export async function getProductsByPriceApi(
   categoryId: string,
   min: number,

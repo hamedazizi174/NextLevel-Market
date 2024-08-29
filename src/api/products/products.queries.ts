@@ -6,6 +6,7 @@ import {
   getProductByIdApi,
   getProductsByCategoryIdApi,
   getProductsByPriceApi,
+  getSimilarProductsApi,
   postProductApi,
 } from "./products.api";
 import { EditProductType } from "@/types/types";
@@ -14,6 +15,17 @@ export function useGetAllProducts(page: number, sort: string) {
   return useQuery({
     queryKey: ["all-products", sort, page],
     queryFn: () => getAllProductsApi(page, sort),
+    refetchOnMount: "always",
+  });
+}
+
+export function useGetSimilarProducts(
+  categoryId: string,
+  subcategoryId: string
+) {
+  return useQuery({
+    queryKey: ["similar-products", categoryId, subcategoryId],
+    queryFn: () => getSimilarProductsApi(categoryId, subcategoryId),
     refetchOnMount: "always",
   });
 }
