@@ -1,5 +1,10 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { deleteCartApi, getAllOrdersApi, updateCartApi } from "./orders.api";
+import {
+  addCartToOrdersApi,
+  changeOrderStatusApi,
+  getAllOrdersApi,
+} from "./orders.api";
+import { AddOrderType } from "@/types/types";
 
 export function useGetAllOrders(
   page: number,
@@ -7,44 +12,32 @@ export function useGetAllOrders(
   sort: string
 ) {
   return useQuery({
-    queryKey: ["all-products", status, sort, page],
+    queryKey: ["orders", status, sort, page],
     queryFn: () => getAllOrdersApi(page, status, sort),
     refetchOnMount: "always",
   });
 }
 
-// export const usePostToCart = () => {
-//   const queryClient = useQueryClient();
-//   return useMutation({
-//     mutationFn: (product: AddToCartType) => postToCartApi(product),
-//     onSuccess() {
-//       queryClient.invalidateQueries({
-//         queryKey: ["cart"],
-//       });
-//     },
-//   });
-// };
-
-export const useDeleteCart = () => {
+export function useAddCartToOrders() {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: (id: string) => deleteCartApi(id),
-    onSuccess() {
-      queryClient.invalidateQueries({
-        queryKey: ["cart"],
-      });
-    },
-  });
-};
-
-export const useUpdateCart = () => {
-  const queryClient = useQueryClient();
-  return useMutation({
-    mutationFn: (newProductInCart: any) => updateCartApi(newProductInCart),
+    mutationFn: (order: AddOrderType) => addCartToOrdersApi(order),
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ["cart"],
+        queryKey: ["orders"],
       });
     },
   });
-};
+}
+
+export function useChangeOrderStatus() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (orderId: string) => changeOrderStatusApi(orderId),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["orders"],
+      });
+    },
+  });
+}

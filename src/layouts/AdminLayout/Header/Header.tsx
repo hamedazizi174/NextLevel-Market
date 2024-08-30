@@ -27,7 +27,7 @@ export default function Header() {
         p="10px"
       >
         <SideDrawer />
-        <Image src="/logo.jpeg" alt="logo" width={144} height={60} />
+        <Image src="/logo.jpeg" alt="logo" width={134} height={50} />
         <List sx={{ display: "flex" }}>
           <ListItem sx={{ px: "0" }}>
             <ListItemButton onClick={logout}>

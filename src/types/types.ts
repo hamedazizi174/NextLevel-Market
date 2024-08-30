@@ -128,6 +128,17 @@ export type CartType = {
   totalPrice: number;
 };
 
+type AddOrderProductsType = {
+  product: string;
+  count: number;
+};
+
+export type AddOrderType = {
+  user: string;
+  products: AddOrderProductsType[];
+  deliveryStatus: boolean;
+};
+
 export interface ShoppingCartItem {
   productId: string;
   productName: string;

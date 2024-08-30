@@ -10,14 +10,7 @@ import { useSearchParams } from "next/navigation";
 export default function AdminTemplate() {
   const searchParams = useSearchParams().get("view");
   return (
-    <Box
-      borderRadius={10}
-      bgcolor={theme.palette.secondary.light}
-      height={550}
-      m={3}
-      p={1}
-      overflow-x="scroll"
-    >
+    <Box borderRadius={10} height={550} m={3} p={1} overflow-x="scroll">
       {!searchParams && <Welcome />}
       {searchParams === adminAccessList[0].view && <AllProducts />}
       {searchParams === adminAccessList[1].view && <Inventory />}

@@ -21,31 +21,31 @@ import { nextButtonLabels, steps } from "@/templates/Cart/Cart";
 const shippingOptions = [
   {
     id: 1,
-    name: "Standard Shipping",
-    description: "Delivery in 5-7 business days",
+    name: "ارسال با ماشین",
+    description: "تحویل بعد از 7 روز کاری",
     icon: <LocalShippingIcon fontSize="large" />,
     price: 5,
   },
   {
     id: 2,
-    name: "Express Shipping",
-    description: "Delivery in 2-3 business days",
+    name: "ارسال با هواپیما",
+    description: "تحویل بعد از 1 روز کاری",
     icon: <AirplanemodeActiveIcon fontSize="large" />,
     price: 15,
   },
   {
     id: 3,
-    name: "Overnight Shipping",
-    description: "Next day delivery",
+    name: "تحویل فوری",
+    description: "تحویل در همان روز",
     icon: <DirectionsBoatIcon fontSize="large" />,
     price: 25,
   },
   {
     id: 4,
-    name: "Same Day Delivery",
-    description: "Delivery within the same day",
+    name: "عدم تعجیل در تحویل",
+    description: "تحویل بعد از 10 روز کاری",
     icon: <TwoWheelerIcon fontSize="large" />,
-    price: 35,
+    price: 3,
   },
 ];
 
@@ -66,14 +66,12 @@ const StyledCard = styled(Card)<StyledCardProps>(({ theme, selected }) => ({
 
 const SelectButton = styled(Button)(({ theme }) => ({
   borderRadius: 12,
-  background: `linear-gradient(145deg, ${theme.palette.primary.main} 0%, ${theme.palette.secondary.main} 100%)`,
+  background: theme.palette.primary.main,
   color: "#fff",
-  "&:hover": {
-    background: `linear-gradient(145deg, ${theme.palette.secondary.main} 0%, ${theme.palette.primary.main} 100%)`,
-  },
+  fontSize: 20,
 }));
 
-const ShippingTemplate: React.FC = () => {
+const Shipping: React.FC = () => {
   const { shippingInfo, setShippingInfo, activeStep, setActiveStep } =
     useCheckoutStore();
   const [selectedOption, setSelectedOption] = useState<number>(
@@ -89,7 +87,7 @@ const ShippingTemplate: React.FC = () => {
   const [shippingDescription, setShippingDescription] = useState<string>(
     shippingInfo.shippingDescription
   );
-  const [error, setError] = React.useState<string>("");
+  const [error, setError] = useState<string>("");
   useEffect(() => {
     setShippingInfo({
       selected: selectedOption,
@@ -141,7 +139,7 @@ const ShippingTemplate: React.FC = () => {
           align="center"
           sx={{ mb: 4, color: "#00796b" }}
         >
-          Shipping Options
+          نحوه ارسال بسته را تعیین نمایید
         </Typography>
         <Grid container spacing={12}>
           {shippingOptions.map((option) => (
@@ -165,11 +163,11 @@ const ShippingTemplate: React.FC = () => {
                   >
                     {option.name}
                   </Typography>
-                  <Typography variant="body2" sx={{ mb: 2, color: "#004d40" }}>
+                  <Typography variant="h6" sx={{ mb: 2, color: "#004d40" }}>
                     {option.description}
                   </Typography>
                   <Typography variant="h6" sx={{ mb: 2, color: "#004d40" }}>
-                    ${option.price}
+                    {option.price} تومان
                   </Typography>
                 </CardContent>
                 <CardActions
@@ -180,7 +178,7 @@ const ShippingTemplate: React.FC = () => {
                     onClick={() => handleSelect(option.id)}
                     sx={{ mt: 2 }}
                   >
-                    {selectedOption === option.id ? "Selected" : "Select"}
+                    {selectedOption === option.id ? "انتخاب شده" : "انتخاب"}
                   </SelectButton>
                 </CardActions>
               </StyledCard>
@@ -223,7 +221,7 @@ const ShippingTemplate: React.FC = () => {
           onClick={handleNext}
         >
           {activeStep === steps.length - 1
-            ? "Finish"
+            ? "پایان"
             : nextButtonLabels[activeStep]}
         </Button>
       </Box>
@@ -231,4 +229,4 @@ const ShippingTemplate: React.FC = () => {
   );
 };
 
-export default ShippingTemplate;
+export default Shipping;

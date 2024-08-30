@@ -15,32 +15,31 @@ import LocalAtmIcon from "@mui/icons-material/LocalAtm";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import { useCheckoutStore } from "@/store/checkoutStore";
-import { nextButtonLabels, steps } from "@/templates/Cart/Cart";
 import { ROUTES } from "@/constant/routes";
 
 const paymentOptions = [
   {
     id: 1,
-    name: "Credit Card",
-    description: "Pay with your credit card",
+    name: "کارت بانکی",
+    description: "با کارت بانکیتان پرداخت کنید",
     icon: <CreditCardIcon fontSize="large" />,
   },
   {
     id: 2,
-    name: "Bank Transfer",
-    description: "Pay via bank transfer",
+    name: "انتقال از شماره حساب",
+    description: "از شماره حسابتان انتقال دهید",
     icon: <AccountBalanceIcon fontSize="large" />,
   },
   {
     id: 3,
-    name: "PayPal",
-    description: "Pay using PayPal",
+    name: "پی پال",
+    description: "با پی پال پرداخت کنید",
     icon: <PaymentIcon fontSize="large" />,
   },
   {
     id: 4,
-    name: "Cash on Delivery",
-    description: "Pay with cash upon delivery",
+    name: "نقدی",
+    description: "با پول نقد حساب کنید",
     icon: <LocalAtmIcon fontSize="large" />,
   },
 ];
@@ -62,14 +61,12 @@ const StyledCard = styled(Card)<StyledCardProps>(({ theme, selected }) => ({
 
 const SelectButton = styled(Button)(({ theme }) => ({
   borderRadius: 12,
-  background: `linear-gradient(145deg, ${theme.palette.primary.main} 0%, ${theme.palette.secondary.main} 100%)`,
+  background: theme.palette.primary.main,
   color: "#fff",
-  "&:hover": {
-    background: `linear-gradient(145deg, ${theme.palette.secondary.main} 0%, ${theme.palette.primary.main} 100%)`,
-  },
+  fontSize: 20,
 }));
 
-export default function PaymentTemplate() {
+export default function Payment() {
   const {
     activeStep,
     setActiveStep,
@@ -129,7 +126,7 @@ export default function PaymentTemplate() {
           align="center"
           sx={{ mb: 4, color: "#00796b" }}
         >
-          Payment Options
+          نحوه پرداخت را مشخص نمایید
         </Typography>
         <Grid container spacing={12}>
           {paymentOptions.map((option) => (
@@ -153,7 +150,7 @@ export default function PaymentTemplate() {
                   >
                     {option.name}
                   </Typography>
-                  <Typography variant="body2" sx={{ mb: 2, color: "#004d40" }}>
+                  <Typography variant="h6" sx={{ mb: 2, color: "#004d40" }}>
                     {option.description}
                   </Typography>
                 </CardContent>
@@ -166,8 +163,8 @@ export default function PaymentTemplate() {
                     sx={{ mt: 2 }}
                   >
                     {selectedOptionpayment === option.id
-                      ? "Selected"
-                      : "Select"}
+                      ? "انتخاب شده"
+                      : "انتخاب"}
                   </SelectButton>
                 </CardActions>
               </StyledCard>
@@ -207,6 +204,7 @@ export default function PaymentTemplate() {
         <Button
           endIcon={<ArrowBackIosNewIcon />}
           variant="contained"
+          onClick={() => setActiveStep(0)}
           href={ROUTES.PAYMENT}
         >
           {"پرداخت"}

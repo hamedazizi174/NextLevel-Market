@@ -1,12 +1,13 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import { CartType } from "../types/types";
+import { CartType, UserType } from "../types/types";
 
 type CartStoreType = {
   cart: CartType[];
   addToCart: (product: CartType) => void;
   updateCount: (product: CartType) => void;
   removeFromCart: (product: CartType) => void;
+  clearCart: (user: UserType) => void;
 };
 
 export const useCartStore = create<CartStoreType>()(
@@ -45,31 +46,6 @@ export const useCartStore = create<CartStoreType>()(
           set((state) => ({ cart: [...state.cart, product] }));
           console.log("4");
         }
-        //   const cartItem = cart.find(
-        //     (item) => item.products._id === product.product._id
-        //   );
-        //   if (cartItem) {
-        //     const updatedCart = cart.map((item) =>
-        //       item.product._id === product.product._id
-        //         ? { ...item, count: (item.count as number) + product.count }
-        //         : item
-        //     );
-        //     set((state) => ({
-        //       cart: updatedCart,
-        //       totalCount: state.totalCount + product.count,
-        //       totalPrice:
-        //         state.totalPrice + product.product.price * product.count,
-        //     }));
-        //   } else {
-        //     const updatedCart = [...cart, { ...product }];
-
-        //     set((state) => ({
-        //       cart: updatedCart,
-        //       totalCount: state.totalCount + product.count,
-        //       totalPrice:
-        //         state.totalPrice + product.product.price * product.count,
-        //     }));
-        //   }
       },
       updateCount: (product) => {
         const cart = get().cart;
@@ -86,25 +62,6 @@ export const useCartStore = create<CartStoreType>()(
           product.products[0].count;
         // cart[userCartIndex].totalPrice += product.totalPrice;
         set((state) => ({ cart: [...state.cart] }));
-
-        //   const cartItem = cart.find(
-        //     (item) => item.product._id === product.product._id
-        //   );
-        //   const oldCount = cartItem?.count;
-        //   const updatedCart = cart.map((item) =>
-        //     item.product._id === product.product._id
-        //       ? { ...item, count: product.count }
-        //       : item
-        //   );
-        //   set((state) => ({
-        //     cart: updatedCart,
-        //     totalCount: state.totalCount - (oldCount || 0) + product.count,
-        //     totalPrice:
-        //       state.totalPrice +
-        //       product.product.price * (product.count - (oldCount || 0)),
-        //   }));
-        //   console.log(get());
-        //   console.log("get()^");
       },
       removeFromCart: (product) => {
         const cart = get().cart;
@@ -117,6 +74,13 @@ export const useCartStore = create<CartStoreType>()(
         cart[userCartIndex].totalPrice -=
           product.products[0].count * product.products[0].price;
         set((state) => ({ cart: [...state.cart] }));
+      },
+      clearCart: (user) => {
+        const cart = get().cart;
+        const userCartIndex = cart.findIndex(
+          (item) => item.userId === user._id
+        );
+        cart[userCartIndex].products = [];
       },
     }),
     { name: "myCart" }

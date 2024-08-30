@@ -1,6 +1,5 @@
-import OrderDetails from "@/components/cart/Invoice/Invoice";
-import PaymentTemplate from "@/components/cart/PaymentTemplate/PaymentTemplate";
-import ShippingTemplate from "@/components/cart/ShippingTemplate/ShippingTemplate";
+import Payment from "@/components/cart/PaymentTemplate/PaymentTemplate";
+import Shipping from "@/components/cart/ShippingTemplate/ShippingTemplate";
 import ShoppingCart from "@/components/cart/ShoppingCartTemplate/ShoppingCartTemplate";
 import { useCheckoutStore } from "@/store/checkoutStore";
 import { Step, StepLabel, Stepper } from "@mui/material";
@@ -15,7 +14,7 @@ export const nextButtonLabels = [
 ];
 
 export default function CartTemplate() {
-  const { activeStep, setActiveStep } = useCheckoutStore();
+  const { activeStep } = useCheckoutStore();
 
   const [skipped] = useState(new Set<number>());
 
@@ -25,7 +24,7 @@ export default function CartTemplate() {
 
   return (
     <>
-      <Stepper activeStep={activeStep}>
+      <Stepper activeStep={activeStep} sx={{ p: 4 }}>
         {steps.map((label, index) => {
           const stepProps: { completed?: boolean } = {};
           const labelProps: {
@@ -45,9 +44,9 @@ export default function CartTemplate() {
       {activeStep === 0 ? (
         <ShoppingCart />
       ) : activeStep === 1 ? (
-        <ShippingTemplate />
+        <Shipping />
       ) : (
-        <PaymentTemplate />
+        <Payment />
       )}
     </>
   );

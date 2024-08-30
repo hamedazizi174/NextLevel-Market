@@ -1,3 +1,4 @@
+import { AddOrderType } from "@/types/types";
 import { api } from "../config.api";
 
 export async function getAllOrdersApi(
@@ -15,17 +16,12 @@ export async function getAllOrdersApi(
   return res.data;
 }
 
-// export async function postToCartApi(product: AddToCartType) {
-//   const res = await api.post("/orders", product);
-//   return res.data;
-// }
+export async function addCartToOrdersApi(order: AddOrderType) {
+  const res = await api.post("/orders", order);
+  return res.data;
+}
 
-export const deleteCartApi = async (id: string) => {
-  const response = await api.delete(`/orders/${id}`);
-  return response.data;
-};
-
-export const updateCartApi = async (productInCart: any) => {
-  const response = await api.put(`/cart/${productInCart.id}`, productInCart);
-  return response.data;
-};
+export async function changeOrderStatusApi(orderId: string) {
+  const res = await api.patch(`/orders/${orderId}`, { deliveryStatus: true });
+  return res.data;
+}

@@ -54,7 +54,9 @@ export default function BestSelling() {
                 sx={{ borderRadius: 3, minWidth: "230px" }}
                 key={product._id}
               >
-                <CardActionArea>
+                <CardActionArea
+                  href={`/categories/${product?.category.name}/${product?._id}`}
+                >
                   <CardMedia
                     image={`http://${product?.images[0]}`}
                     sx={{

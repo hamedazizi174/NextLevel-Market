@@ -1,6 +1,7 @@
+import { useChangeOrderStatus } from "@/api/orders/orders.queries";
 import { pageLocalization } from "@/constant/localization";
 import { OrderType } from "@/types/types";
-import { TableCell, TableRow } from "@mui/material";
+import { Button, TableCell, TableRow } from "@mui/material";
 
 type Props = {
   allOrders: OrderType[];
@@ -18,6 +19,7 @@ export default function TableBodyRows({ allOrders }: Props) {
       orderCheck: pageLocalization.admin.orderCheck,
     };
   });
+  const { mutate } = useChangeOrderStatus();
 
   return (
     <>
@@ -29,7 +31,9 @@ export default function TableBodyRows({ allOrders }: Props) {
           <TableCell>{row.fullName}</TableCell>
           <TableCell align="center">${row.totalPrice}</TableCell>
           <TableCell align="center">{row.orderTime}</TableCell>
-          <TableCell align="center">{row.orderCheck}</TableCell>
+          <TableCell align="center" onClick={() => mutate(row.id)}>
+            <Button>تغییر وضعیت سفارش</Button>
+          </TableCell>
         </TableRow>
       ))}
     </>
