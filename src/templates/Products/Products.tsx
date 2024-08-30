@@ -55,76 +55,81 @@ export default function ProductsTemplate({ categoryName }: prop) {
         textAlign="center"
         my={5}
       >
-        <Typography variant="h4" mb={3}>
-          Filter
+        <Typography variant="h5" mb={3}>
+          فیلتر بر اساس قیمت
         </Typography>
-        <Stack>
-          <FormLabel>By Price:</FormLabel>
+        <Stack alignItems="center">
           <RadioGroup>
             <FormControlLabel
-              value="0-100"
+              value="0-50"
               control={<Radio />}
-              label="0-$100"
+              label="0-50 تومان"
+              onClick={(e) => filterByPrice(e)}
+            />
+            <FormControlLabel
+              value="51-100"
+              control={<Radio />}
+              label="51-100 تومان"
               onClick={(e) => filterByPrice(e)}
             />
             <FormControlLabel
               value="101-200"
               control={<Radio />}
-              label="$101-$200"
+              label="101-200 تومان"
               onClick={(e) => filterByPrice(e)}
             />
             <FormControlLabel
               value="201-300"
               control={<Radio />}
-              label="$201-$300"
+              label="201-300 تومان"
               onClick={(e) => filterByPrice(e)}
             />
             <FormControlLabel
               value="301-400"
               control={<Radio />}
-              label="$301-$400"
+              label="301-400 تومان"
               onClick={(e) => filterByPrice(e)}
             />
             <FormControlLabel
               value="401-500"
               control={<Radio />}
-              label="$401-$500"
+              label="401-500 تومان"
               onClick={(e) => filterByPrice(e)}
             />
             <FormControlLabel
               value="501-600"
               control={<Radio />}
-              label="$501-$600"
+              label="501-600 تومان"
               onClick={(e) => filterByPrice(e)}
             />
             <FormControlLabel
               value="601-700"
               control={<Radio />}
-              label="$601-$700"
+              label="601-700 تومان"
               onClick={(e) => filterByPrice(e)}
             />
             <FormControlLabel
               value="701-800"
               control={<Radio />}
-              label="$701-$800"
+              label="701-800 تومان"
               onClick={(e) => filterByPrice(e)}
             />
             <FormControlLabel
               value="801-900"
               control={<Radio />}
-              label="$801-$900"
+              label="801-900 تومان"
               onClick={(e) => filterByPrice(e)}
             />
             <FormControlLabel
               value="901-1000"
               control={<Radio />}
-              label="$901-$1000"
+              label="901-1000 تومان"
               onClick={(e) => filterByPrice(e)}
             />
             <FormControlLabel
               value="1001-1000000"
               control={<Radio />}
-              label="more than $1000"
+              label="بیش از 1000 تومان"
               onClick={(e) => filterByPrice(e)}
             />
           </RadioGroup>

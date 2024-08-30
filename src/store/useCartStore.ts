@@ -81,6 +81,8 @@ export const useCartStore = create<CartStoreType>()(
           (item) => item.userId === user._id
         );
         cart[userCartIndex].products = [];
+        cart[userCartIndex].totalPrice = 0;
+        set((state) => ({ cart: [...state.cart] }));
       },
     }),
     { name: "myCart" }
